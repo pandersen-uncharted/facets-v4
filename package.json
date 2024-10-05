@@ -2,12 +2,11 @@
     "name": "root",
     "private": true,
     "scripts": {
-        "lint": "lerna run --stream lint",
-        "test": "lerna run --stream test",
-        "prePush": "npm-run-all prePush:**",
-        "prePush:lint": "yarn lint",
-        "prePush:test": "yarn test",
-        "bump": "lerna version --no-changelog --no-commit-hooks --no-git-tag-version --no-push"
+        "build": "yarn workspaces foreach run build",
+        "lint": "yarn workspaces foreach run lint",
+        "test": "yarn workspaces foreach run test",
+        "prePush": "yarn run lint && yarn run test",
+        "bump": "yarn version check --interactive && yarn version apply"
     },
     "devDependencies": {
         "@babel/core": "^7.11.1",
@@ -28,7 +27,6 @@
         "eslint": "^7.6.0",
         "globby": "^11.0.1",
         "husky": "^4.2.5",
-        "lerna": "^3.22.1",
         "live-server": "^1.2.1",
         "npm-run-all": "^4.1.5",
         "regenerator-runtime": "^0.13.7",

@@ -34,16 +34,11 @@ $ npm install @uncharted.software/facets-plugins
 The documentation is not hosted anywhere at the moment but can be accessed by building the project and running the
 `facets-docs` package.
 
-It is recommended to install `lerna` globally:
-```shell script
-$ yarn global add lerna
-```
 
 Check out or download this repo, then, from the repo's root folder run the following commands:
 ```shell script
 $ yarn install
-$ lerna bootstrap
-$ lerna run build
+$ yarn build
 ```
 
 You can now run the documentation:
@@ -60,8 +55,7 @@ On your browser navigate to http://localhost:8090/
 Check out or download this repo, then, from the repo's root folder run the following commands:
 ```shell script
 $ yarn install
-$ lerna bootstrap
-$ lerna run build
+$ yarn build
 ```
 
 Start the `watch` script for the packages that you will be working on (usually `factes-core` and `facets-plugins`):
