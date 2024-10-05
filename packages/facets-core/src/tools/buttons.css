@@ -25,8 +25,8 @@
 .facet-button {
     width: 25px;
     height: 25px;
-    background: linear-gradient(180deg, #F2F3F3 0%, #EAEBEC 100%);
-    border: 1px solid #D9DADB;
+    background: linear-gradient(180deg, var(--facet-button-background-gradient-stop-1, #F2F3F3) 0%, var(--facet-button-background-gradient-stop-2, #EAEBEC) 100%);
+    border: 1px solid var(--facet-button-border, #D9DADB);
     box-sizing: border-box;
     display: flex;
     align-items: center;

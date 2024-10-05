@@ -110,11 +110,11 @@
 
 :host([theme="timeline"][facet-value-state="loading"]) .facet-bars-value-background
 {
-    background-color: #F0F1F2;
+    background-color: var(--facet-bars-value-background-loading, #F0F1F2);
 }
 
 :host([theme="timeline"][facet-value-state="loading"]) .facet-bars-value-bar-1,
 :host([theme="timeline"][facet-value-state="loading"]) .facet-bars-value-bar-0
 {
-    background-color: #ECECEC;
+    background-color: var(--facet-bars-value-bar-background-loading, #ECECEC);
 }
