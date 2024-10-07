@@ -1,5 +1,6 @@
 node_modules
 .rts2_cache/
+.yarn/
 .idea/
 packages/*/dist/
 packages/facets-docs/pages/
