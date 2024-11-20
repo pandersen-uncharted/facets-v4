@@ -8,6 +8,7 @@ const typescript = require('rollup-plugin-typescript2');
 const polyfill = require('rollup-plugin-polyfill');
 const string = require('rollup-plugin-string').string;
 const sourcemaps = require('rollup-plugin-sourcemaps');
+const css = require('rollup-plugin-import-css');
 const globby = require('globby');
 const server = require('live-server');
 
@@ -164,6 +165,7 @@ function generateSingleConfig(target, input, output, dependencies = null, module
         }));
     }
 
+    config.plugins.push(css());
     config.plugins.push(sourcemaps());
 
     return config;

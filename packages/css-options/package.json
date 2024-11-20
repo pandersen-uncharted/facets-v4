@@ -12,7 +12,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "npm-run-all --parallel build:**",
+        "build": "npm-run-all --parallel 'build:**'",
         "build:iife": "cross-env TARGET='iife' rollup --config",
         "build:es5": "cross-env TARGET='es5' rollup --config",
         "build:es6": "cross-env TARGET='es6' rollup --config",

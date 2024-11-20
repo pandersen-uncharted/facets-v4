@@ -12,7 +12,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "npm-run-all --parallel build:**",
+        "build": "npm-run-all --parallel 'build:**'",
         "build:server": "cross-env TARGET='server' rollup --config",
         "build:types": "tsc --declaration --declarationMap --emitDeclarationOnly --skipLibCheck --outDir ./dist/types",
         "clean": "rm -rf ./dist",

@@ -12,7 +12,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "npm-run-all --parallel build:**",
+        "build": "npm-run-all --parallel 'build:**'",
         "build:iife": "cross-env TARGET='iife' rollup --config",
         "build:es5": "cross-env TARGET='es5' rollup --config",
         "build:es6": "cross-env TARGET='es6' rollup --config",
@@ -34,7 +34,7 @@
     "dependencies": {
         "@uncharted.software/facets-core": "^3.2.6",
         "@uncharted.software/facets-plugins": "^3.2.6",
-        "codemirror": "^5.49.0",
+        "codemirror": "^5.65.18",
         "lit-element": "^2.2.1",
         "lit-html": "^1.1.2",
         "nick-generator": "^1.0.1"
