@@ -30,7 +30,7 @@
 .facet-container-header {
     height: 20px;
     color: var(--facet-container-surface-foreground, #1A1B1C);
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -45,7 +45,7 @@
 .facet-container-footer {
     height: 20px;
     color: var(--facet-container-surface-foreground, #1A1B1C);
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 10px;
     font-style: normal;
     font-weight: 600;

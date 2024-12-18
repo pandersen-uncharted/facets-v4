@@ -197,7 +197,7 @@
 }
 
 .facet-term-label {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.02em;
@@ -205,7 +205,7 @@
 }
 
 .facet-term-annotation {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.02em;
@@ -216,7 +216,7 @@
 }
 
 .facet-term-value {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.02em;

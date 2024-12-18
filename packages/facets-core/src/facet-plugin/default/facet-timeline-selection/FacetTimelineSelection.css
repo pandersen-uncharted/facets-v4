@@ -124,7 +124,7 @@
     top: 2px;
 
     color: var(--facet-timeline-date-foreground, #050D5C);
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;

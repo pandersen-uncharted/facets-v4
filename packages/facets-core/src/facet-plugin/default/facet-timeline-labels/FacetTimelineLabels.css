@@ -43,7 +43,7 @@
 
 .facet-timeline-labels-label {
     position: absolute;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 10px;
     font-style: normal;
     line-height: 13px;
