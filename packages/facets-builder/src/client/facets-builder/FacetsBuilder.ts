@@ -22,7 +22,8 @@
  *
  */
 
-import {customElement, LitElement, TemplateResult, html} from 'lit-element';
+import {LitElement, TemplateResult, html} from 'lit';
+import {customElement} from 'lit/decorators.js';
 
 @customElement('facets-builder')
 export class FacetsBuilder extends LitElement {

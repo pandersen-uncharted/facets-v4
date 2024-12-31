@@ -22,9 +22,11 @@
  *
  */
 
-import {css, CSSResult, customElement, unsafeCSS, html, TemplateResult, LitElement} from 'lit-element';
+import {css, CSSResult, unsafeCSS, html, TemplateResult, LitElement} from 'lit';
+import {customElement} from 'lit/decorators.js';
 import {FacetBlueprint} from '../facet-blueprint/FacetBlueprint';
 import {MutationWrapper} from '../tools/MutationWrapper';
+import {render} from 'lit-html';
 
 // @ts-ignore
 import facetContainerStyle from './FacetContainer.css';
@@ -122,11 +124,7 @@ export class FacetContainer extends FacetBlueprint {
     }
 
     protected renderSlottedElement(template: TemplateResult, slotted: HTMLElement): void {
-        (this.constructor as typeof LitElement)
-            .render(
-                template,
-                slotted,
-                {scopeName: this.localName, eventContext: this});
+        render(template, slotted, {host: this});
     }
 
     private _processAddedNodes(nodes: NodeList): void {

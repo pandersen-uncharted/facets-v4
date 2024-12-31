@@ -22,9 +22,16 @@
  *
  */
 
-import {customElement, LitElement, TemplateResult, html} from 'lit-element';
-import {directive} from 'lit-html';
+import {LitElement, TemplateResult, html} from 'lit';
+import { customElement } from 'lit/decorators.js';
+import {directive, Directive, PartInfo, DirectiveParameters} from 'lit/directive.js';
 import {MutationWrapper} from '../tools/MutationWrapper';
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'facet-template': FacetTemplate;
+    }
+}
 
 const kSlotsKey = Symbol('FacetTemplate::Slots');
 const kDataKey = Symbol('FacetTemplate::Data');
@@ -32,6 +39,16 @@ const kDataKey = Symbol('FacetTemplate::Data');
 export interface TemplateComponents {
     strings: string[];
     values: (string | symbol)[];
+}
+
+class XLinkDirective extends Directive {
+    render(value: string) {
+        return (part: any): void => {
+            if (part.element) {
+                part.element.setAttributeNS('http://www.w3.org/1999/xlink', part.name, value);
+            }
+        };
+    }
 }
 
 @customElement('facet-template')
@@ -71,7 +88,7 @@ export class FacetTemplate extends LitElement {
     private customAttributesKeys: Map<symbol, string>;
     private tagComponents: TemplateComponents;
     private mutationObserver: MutationWrapper;
-    private xlinkDirective: (...args: any[]) => any;
+    private xlinkDirective = directive(XLinkDirective);
 
     public constructor() {
         super();
@@ -84,15 +101,11 @@ export class FacetTemplate extends LitElement {
             strings: [],
             values: [],
         };
-        this.mutationObserver = new MutationWrapper(this, false);
+        this.mutationObserver = new MutationWrapper(this as unknown as Element, false);
         this.mutationObserver.nodesAdded = this._processAddedNodes.bind(this);
-
-        this.xlinkDirective = directive((value: string) => (part: any): void => {
-            part.committer.element.setAttributeNS('http://www.w3.org/1999/xlink', part.committer.name, value);
-        });
     }
 
-    public getHTML(data: any, customAttributes: {[key: string]: any} = {}): TemplateResult {
+    public generateTemplate(data: any, customAttributes: {[key: string]: any} = {}): TemplateResult {
         return this._getHTML(data, this.tagComponents, customAttributes);
     }
 
@@ -164,7 +177,7 @@ export class FacetTemplate extends LitElement {
         }
     }
 
-    protected createRenderRoot(): Element | ShadowRoot {
+    protected override createRenderRoot(): HTMLElement {
         return this;
     }
 

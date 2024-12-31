@@ -23,7 +23,11 @@
  */
 
 import {FacetElement} from '../facet-element/FacetElement';
-import {LitElement, CSSResult, TemplateResult, html, css, unsafeCSS, customElement} from 'lit-element';
+import {CSSResult, LitElement, html, css, unsafeCSS} from 'lit';
+import {render} from 'lit-html';
+import {type TemplateResult} from 'lit';
+import {isTemplateResult} from 'lit/directive-helpers.js';
+import { customElement } from 'lit/decorators.js';
 // @ts-ignore
 import FacetBlueprintStyle from './FacetBlueprint.css';
 
@@ -47,7 +51,7 @@ export class FacetBlueprint extends FacetElement {
         }
 
         return html`
-            ${this.cssOptions.supportsCSSVars ? undefined : this.computeStyle()}
+            ${this.computeStyle()}
             <div class="facet-blueprint">
                 <div class="facet-blueprint-header">
                     ${slots.has('header') ? html`<slot name="header"></slot>` : this.renderHeader()}
@@ -74,12 +78,8 @@ export class FacetBlueprint extends FacetElement {
     protected update(changedProperties: Map<PropertyKey, unknown>): void {
         if (this.renderRoot !== this) {
             const templateResult = this.renderLightDOM() as unknown;
-            if (templateResult instanceof TemplateResult) {
-                (this.constructor as typeof LitElement)
-                    .render(
-                        templateResult,
-                        this,
-                        {scopeName: this.localName, eventContext: this});
+            if (isTemplateResult(templateResult)) {
+                render(templateResult, this, {host: this});
             }
         }
         super.update(changedProperties);

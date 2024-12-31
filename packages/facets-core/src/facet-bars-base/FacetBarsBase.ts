@@ -22,9 +22,9 @@
  *
  */
 
-import {css, CSSResult, customElement, html, TemplateResult, unsafeCSS} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
-import {DirectiveFn} from 'lit-html/lib/directive';
+import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {repeat} from 'lit/directives/repeat.js';
 import {FacetContainer} from '../facet-container/FacetContainer';
 import {FacetBarsValueData, kFacetVarsValueNullData} from '../facet-bars-value/FacetBarsValue';
 
@@ -268,7 +268,7 @@ export class FacetBarsBase extends FacetContainer {
         const actionButtons = this.actionButtons.toString();
         const view: [number, number] = this.view;
         const values = this._values;
-        const htmlTemplate: DirectiveFn = this.getValuesHTML(
+        const htmlTemplate = this.getValuesHTML(
             this._getViewValues(values, view),
             actionButtons,
             view[0],
@@ -284,7 +284,7 @@ export class FacetBarsBase extends FacetContainer {
         values: (FacetBarsValueData|null)[],
         actionButtons: string,
         offset: number,
-    ): DirectiveFn {
+    ): ReturnType<typeof repeat>  {
         const theme = this.barValueTheme;
         const contrast = this.hover;
         let id = 0;
@@ -301,7 +301,7 @@ export class FacetBarsBase extends FacetContainer {
             const clipRight = i + 1 > domain[1] ? (i + 1) - domain[1] : 0;
 
             if (template) {
-                return template.getHTML(value || kFacetVarsValueNullData, {
+                return template.generateTemplate(value || kFacetVarsValueNullData, {
                     'id': i + offset,
                     'theme': theme,
                     'facet-value-state': overrideState !== null ? overrideState : computedState,

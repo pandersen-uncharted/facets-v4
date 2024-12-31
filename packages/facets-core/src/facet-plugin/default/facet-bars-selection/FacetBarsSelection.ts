@@ -23,7 +23,8 @@
  */
 
 import {FacetPlugin} from '../../FacetPlugin';
-import {customElement, TemplateResult, html} from 'lit-element';
+import {TemplateResult, html} from 'lit';
+import { customElement } from 'lit/decorators.js';
 import {FacetBarsBase} from '../../../facet-bars-base/FacetBarsBase';
 
 // @ts-ignore
@@ -87,7 +88,7 @@ export class FacetBarsSelection extends FacetPlugin {
         }
     }
 
-    protected createRenderRoot(): Element | ShadowRoot {
+    protected createRenderRoot(): HTMLElement | DocumentFragment {
         return this;
     }
 

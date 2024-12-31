@@ -25,8 +25,9 @@
 import { FacetContainer } from '../facet-container/FacetContainer';
 import { FacetTemplate } from '../facet-template/FacetTemplate';
 import { FacetTermsValueData } from '../facet-terms-value/FacetTermsValue';
-import { css, CSSResult, customElement, html, TemplateResult, unsafeCSS } from 'lit-element';
-import { repeat } from 'lit-html/directives/repeat';
+import { css, CSSResult, html, TemplateResult, unsafeCSS } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { repeat } from 'lit/directives/repeat.js';
 import { preHTML } from '../tools/preHTML';
 import { polyMatches } from '../tools/PolyMatches';
 
@@ -152,7 +153,7 @@ export class FacetTerms extends FacetContainer {
                 const values = this.computeValuesArray(value, subselection);
                 const template = this.templates.get(type);
                 if (template) {
-                    return template.getHTML(value, {
+                    return template.generateTemplate(value, {
                         'id': key,
                         'action-buttons': this.actionButtons,
                         'state': state,

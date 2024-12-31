@@ -22,7 +22,8 @@
  *
  */
 
-import { customElement, TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit-element';
+import { type TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { FacetBarsBase, FacetBarsBaseData, kFacetBarsBaseDefaultValues } from '../facet-bars-base/FacetBarsBase';
 
 // @ts-ignore
@@ -106,10 +107,9 @@ export class FacetBars extends FacetBarsBase {
             const theme = this.getAttribute('theme');
             const hostTheme = theme ? `[theme="${theme}"]` : ':not([theme])';
 
-            const cssOptions = this.cssOptions;
             const styles = [];
 
-            const tickValue = cssOptions.read('facet-bars-tick-color');
+            const tickValue = getComputedStyle(this).getPropertyValue('--facet-bars-tick-color').trim();
             if (tickValue !== undefined) {
                 styles.push(`:host(${hostTheme}:hover) .facet-blueprint .facet-blueprint-left { border-left: 4px solid ${tickValue}; }`);
             }

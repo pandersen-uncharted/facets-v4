@@ -78,7 +78,7 @@ import buildCSS from './build-a-facet/style.css';
 // @ts-ignore
 import buildJS from './build-a-facet/source.example';
 
-export const examples = {
+export const examples: Record<string, any> = {
     'facet-blueprint': {
         html: blueprintHTML,
         css: blueprintCSS,

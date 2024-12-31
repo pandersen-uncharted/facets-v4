@@ -23,8 +23,9 @@
  */
 
 import {FacetPlugin} from '../../FacetPlugin';
-import {customElement, TemplateResult, html} from 'lit-element';
-import { styleMap, StyleInfo } from 'lit-html/directives/style-map';
+import {TemplateResult, html} from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { styleMap, StyleInfo } from 'lit/directives/style-map.js';
 import {FacetTimeline} from '../../../facet-timeline/FacetTimeline';
 import {FacetBarsFilterValue, FacetBarsFilterEdge} from '../../../facet-bars-base/FacetBarsBase';
 
@@ -120,7 +121,7 @@ export class FacetTimelineSelection extends FacetPlugin {
         }
     }
 
-    protected createRenderRoot(): Element | ShadowRoot {
+    protected createRenderRoot(): HTMLElement | DocumentFragment {
         return this;
     }
 

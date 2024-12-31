@@ -22,7 +22,8 @@
  *
  */
 
-import {customElement, TemplateResult, html} from 'lit-element';
+import {TemplateResult, html} from 'lit';
+import { customElement } from 'lit/decorators.js';
 import {preHTML} from '../tools/preHTML';
 import {FacetContainer} from '../facet-container/FacetContainer';
 import {FacetTemplate} from '../facet-template/FacetTemplate';

@@ -47,7 +47,7 @@ $ cd packages/facets-docs
 $ yarn start
 ```
 
-On your browser navigate to http://localhost:8090/
+On your browser navigate to http://localhost:5173/
 
 
 ## Development

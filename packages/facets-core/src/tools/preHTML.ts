@@ -22,7 +22,7 @@
  *
  */
 
-import {html, TemplateResult} from 'lit-element';
+import {html, TemplateResult} from 'lit';
 
 interface CachedNeedlessValue {
     value: any;

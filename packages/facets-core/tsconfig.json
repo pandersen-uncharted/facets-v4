@@ -1,6 +1,7 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
+        "moduleResolution": "bundler",
         "outDir": "./dist",
         "strict": true,
         "allowJs": false,

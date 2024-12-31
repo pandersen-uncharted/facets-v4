@@ -22,7 +22,8 @@
  *
  */
 
-import { customElement, TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit-element';
+import { TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import {
     FacetBarsBase,
     FacetBarsValueDataTyped,

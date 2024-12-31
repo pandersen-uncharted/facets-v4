@@ -25,7 +25,8 @@
 import {FacetPlugin} from '../../FacetPlugin';
 import {FacetBarsValueData} from '../../../facet-bars-value/FacetBarsValue';
 import {FacetBarsBase} from '../../../facet-bars-base/FacetBarsBase';
-import {css, CSSResult, customElement, html, TemplateResult, unsafeCSS} from 'lit-element';
+import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
+import { customElement } from 'lit/decorators.js';
 
 // @ts-ignore
 import FacetBarsLabelsStyle from './FacetBarsLabels.css';
@@ -121,7 +122,10 @@ export class FacetBarsLabels extends FacetPlugin {
                     this._processRow(rows[i], width, barStep, barStepPercentage);
                 }
             } else {
-                requestAnimationFrame((): Promise<unknown> => facet.requestUpdate());
+                requestAnimationFrame(() => {
+                    facet.requestUpdate();
+                    return Promise.resolve();
+                });
             }
 
             const result: TemplateResult[] = [];

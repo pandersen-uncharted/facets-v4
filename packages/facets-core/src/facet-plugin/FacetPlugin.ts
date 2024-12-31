@@ -22,14 +22,15 @@
  *
  */
 
-import {customElement, LitElement} from 'lit-element';
+import {LitElement} from 'lit';
+import { customElement } from 'lit/decorators.js';
 
 @customElement('facet-plugin')
 export class FacetPlugin extends LitElement {
     public static connectedEvent = 'facet-plugin-connected';
     public static disconnectedEvent = 'facet-plugin-disconnected';
 
-    private _boundUpdateHandler: EventHandlerNonNull = this._updateHandler.bind(this);
+    private _boundUpdateHandler: EventListener = this._updateHandler.bind(this);
 
     private _host: LitElement|null = null;
     public get host(): LitElement|null {

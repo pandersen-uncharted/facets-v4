@@ -22,8 +22,8 @@
  *
  */
 
-import {css, CSSResult, customElement, unsafeCSS, html, TemplateResult} from 'lit-element';
-import {CSSOptions} from '@uncharted.software/css-options';
+import {css, CSSResult, unsafeCSS, html, TemplateResult} from 'lit';
+import { customElement } from 'lit/decorators.js';
 import {FacetHoverable} from '../facet-hoverable/FacetHoverable';
 
 // @ts-ignore
@@ -75,48 +75,46 @@ export class FacetTermsValue extends FacetHoverable {
             ${unsafeCSS(facetTermValueStyle)}
         `);
 
-        if (CSSOptions.supportsCSSVars) {
-            // add the style for 20 sub-bars, sorry future Dario, you'll probably have to make this number dynamic
-            // start at bar 2 since the css already has the proper style for the first two
-            for (let i = 2; i < 20; ++i) {
-                styles.push(css`
-                    :host([state="normal"]) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-normal);
-                    }
+        // add the style for 20 sub-bars, sorry future Dario, you'll probably have to make this number dynamic
+        // start at bar 2 since the css already has the proper style for the first two
+        for (let i = 2; i < 20; ++i) {
+            styles.push(css`
+                :host([state="normal"]) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-normal);
+                }
 
-                    :host([contrast=true][state="normal"]) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-normal-contrast);
-                    }
+                :host([contrast=true][state="normal"]) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-normal-contrast);
+                }
 
-                    :host([contrast=true][state="normal"]:hover) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-normal-contrast-hover);
-                    }
+                :host([contrast=true][state="normal"]:hover) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-normal-contrast-hover);
+                }
 
-                    :host([state="selected"]) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-selected);
-                    }
+                :host([state="selected"]) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-selected);
+                }
 
-                    :host([contrast=true][state="selected"]) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-selected-contrast);
-                    }
+                :host([contrast=true][state="selected"]) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-selected-contrast);
+                }
 
-                    :host([contrast=true][state="selected"]:hover) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-selected-contrast-hover);
-                    }
+                :host([contrast=true][state="selected"]:hover) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-selected-contrast-hover);
+                }
 
-                    :host([state="muted"]) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-muted);
-                    }
+                :host([state="muted"]) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-muted);
+                }
 
-                    :host([contrast=true][state="muted"]) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-muted-contrast);
-                    }
+                :host([contrast=true][state="muted"]) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-muted-contrast);
+                }
 
-                    :host([contrast=true][state="muted"]:hover) .facet-terms-value-bar-${i} {
-                        background-color: var(--facet-terms-bar-${i}-muted-contrast-hover);
-                    }
-                `);
-            }
+                :host([contrast=true][state="muted"]:hover) .facet-terms-value-bar-${i} {
+                    background-color: var(--facet-terms-bar-${i}-muted-contrast-hover);
+                }
+            `);
         }
 
         return styles;
@@ -206,7 +204,6 @@ export class FacetTermsValue extends FacetHoverable {
             const theme = this.getAttribute('theme');
             const hostTheme = theme ? `[theme="${theme}"]` : ':not([theme])';
 
-            const cssOptions = this.cssOptions;
             const styles = [];
             const n = this.values.length;
             let i = 0;
@@ -214,8 +211,8 @@ export class FacetTermsValue extends FacetHoverable {
             do {
                 hasOption = false;
                 for (let ii = 0, nn = kBarStyleSuffixes.length; ii < nn; ++ii) {
-                    const option = `${kBarStylePrefix}${i}${kBarStyleSuffixes[ii]}`;
-                    const optionValue = cssOptions.read(option);
+                    const option = `--${kBarStylePrefix}${i}${kBarStyleSuffixes[ii]}`;
+                    const optionValue = getComputedStyle(this).getPropertyValue(option).trim();
                     if (optionValue !== undefined) {
                         hasOption = true;
                         styles.push(kBarStyleGenerators[kBarStyleSuffixes[ii]](hostTheme, i, optionValue));
@@ -223,12 +220,12 @@ export class FacetTermsValue extends FacetHoverable {
                 }
             } while (++i < n || hasOption);
 
-            const tickValue = cssOptions.read('facet-terms-tick-color');
+            const tickValue = getComputedStyle(this).getPropertyValue('--facet-terms-tick-color').trim();
             if (tickValue !== undefined) {
                 styles.push(`:host(${hostTheme}:hover) .facet-blueprint .facet-blueprint-left { border-left: 4px solid ${tickValue}; }`);
             }
 
-            const selectedBackground = cssOptions.read('facet-terms-selected-background');
+            const selectedBackground = getComputedStyle(this).getPropertyValue('--facet-terms-selected-background');
             if (selectedBackground !== undefined) {
                 styles.push(`:host(${hostTheme}[state="selected"]) .facet-blueprint:first-of-type { background-color:${selectedBackground}; }`);
             }
