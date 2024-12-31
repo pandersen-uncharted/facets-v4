@@ -1424,16 +1424,17 @@ __metadata:
   dependencies:
     "@types/express": ^4.17.2
     "@types/node": ^12.12.19
-    "@uncharted.software/facets-core": ^4.0.0
-    "@uncharted.software/facets-plugins": ^4.0.0
+    "@uncharted.software/facets-core": "workspace:^"
+    "@uncharted.software/facets-plugins": "workspace:^"
     express: ^4.17.1
     nick-generator: ^1.0.1
     nodemon: ^2.0.2
     reload: ^3.0.3
+    vite: ^6.0.6
   languageName: unknown
   linkType: soft
 
-"@uncharted.software/facets-core@^4.0.0, @uncharted.software/facets-core@workspace:^, @uncharted.software/facets-core@workspace:^4.0.0, @uncharted.software/facets-core@workspace:packages/facets-core":
+"@uncharted.software/facets-core@workspace:^, @uncharted.software/facets-core@workspace:^4.0.0, @uncharted.software/facets-core@workspace:packages/facets-core":
   version: 0.0.0-use.local
   resolution: "@uncharted.software/facets-core@workspace:packages/facets-core"
   dependencies:
@@ -1465,7 +1466,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uncharted.software/facets-plugins@^4.0.0, @uncharted.software/facets-plugins@workspace:^4.0.0, @uncharted.software/facets-plugins@workspace:packages/facets-plugins":
+"@uncharted.software/facets-plugins@workspace:^, @uncharted.software/facets-plugins@workspace:^4.0.0, @uncharted.software/facets-plugins@workspace:packages/facets-plugins":
   version: 0.0.0-use.local
   resolution: "@uncharted.software/facets-plugins@workspace:packages/facets-plugins"
   dependencies:
