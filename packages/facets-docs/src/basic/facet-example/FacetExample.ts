@@ -1,4 +1,4 @@
-import { html, LitElement, TemplateResult } from 'lit';
+import { css, unsafeCSS,html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { basicSetup, EditorView } from 'codemirror';
 import { html as langHtml } from '@codemirror/lang-html';
@@ -7,6 +7,7 @@ import { javascript as langJavascript } from '@codemirror/lang-javascript';
 
 
 import { examples } from '../examples';
+import examplesStyle from './style.css?inline';
 
 export @customElement('facet-example')
 class FacetExample extends LitElement {
@@ -19,9 +20,9 @@ class FacetExample extends LitElement {
     private editorJS: EditorView | null = null;
     private preview: HTMLIFrameElement | null = null;
 
-    // static styles = css`
-    //     ${unsafeCSS(examplesStyle)}
-    // `;
+    static styles = css`
+        ${unsafeCSS(examplesStyle)}
+    `;
 
     constructor(exampleId: string) {
         super();
@@ -143,23 +144,11 @@ class FacetExample extends LitElement {
                 <meta charset="UTF-8">
                 <base target="_parent" />
                 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
-                <style>${this.editorCSS?.state.doc.toString()}</style>
+                <style>
+                    ${this.editorCSS?.state.doc.toString()}
+                </style>
             </head>
             <body>
-                <script>
-                    if (!window.facetsdocs) {
-                        const script = document.createElement('script');
-                        script.setAttribute('type', 'text/javascript');
-                        script.setAttribute('src', 'dist/iife/index.js');
-                        document.body.style.visibility = 'hidden';
-                        script.addEventListener('load', () => {
-                            setTimeout(() => {
-                                document.body.style.visibility = 'visible';
-                            }, 50);
-                        });
-                        document.head.appendChild(script);
-                    }
-                </script>
                 ${this.editorHTML?.state.doc.toString()}
                 <script>
                     (function() {
