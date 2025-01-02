@@ -23,7 +23,6 @@
  */
 
 import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
-import {customElement} from 'lit/decorators.js';
 import {repeat} from 'lit/directives/repeat.js';
 import {FacetContainer} from '../facet-container/FacetContainer';
 import {FacetBarsValueData, kFacetVarsValueNullData} from '../facet-bars-value/FacetBarsValue';
@@ -76,8 +75,7 @@ const kFilterValueHasChanged = (newVal: [FacetBarsFilterEdge, FacetBarsFilterEdg
     }
     return false;
 };
-
-@customElement('facet-bars-base') /* should not be instantiated as a custom element */
+/* should not be instantiated as a custom element */
 export class FacetBarsBase extends FacetContainer {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();

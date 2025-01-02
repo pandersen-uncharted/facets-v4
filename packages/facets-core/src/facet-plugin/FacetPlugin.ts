@@ -23,9 +23,7 @@
  */
 
 import {LitElement} from 'lit';
-import { customElement } from 'lit/decorators.js';
 
-@customElement('facet-plugin')
 export class FacetPlugin extends LitElement {
     public static connectedEvent = 'facet-plugin-connected';
     public static disconnectedEvent = 'facet-plugin-disconnected';
@@ -100,4 +98,11 @@ export class FacetPlugin extends LitElement {
             this.hostUpdated(event.detail.changedProperties);
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-plugin')) {
+    customElements.define('facet-plugin', FacetPlugin);
+} else {
+    console.debug('facet-plugin element already defined, skipping registration');
 }

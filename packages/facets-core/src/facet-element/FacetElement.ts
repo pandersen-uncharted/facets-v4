@@ -23,11 +23,9 @@
  */
 
 import {CSSResult, LitElement, TemplateResult} from 'lit';
-import { customElement } from 'lit/decorators.js';
 import {FacetPlugin} from '../facet-plugin/FacetPlugin';
 import {FacetTemplate} from '../facet-template/FacetTemplate';
 
-@customElement('facet-element')
 export class FacetElement extends LitElement {
     protected plugins: Set<FacetPlugin> = new Set();
     protected templates: Map<string, FacetTemplate> = new Map();
@@ -165,4 +163,11 @@ export class FacetElement extends LitElement {
             }
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-element')) {
+    customElements.define('facet-element', FacetElement);
+} else {
+    console.debug('facet-element element already defined, skipping registration');
 }

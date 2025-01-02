@@ -23,7 +23,6 @@
  */
 
 import {TemplateResult, html} from 'lit';
-import { customElement } from 'lit/decorators.js';
 import {preHTML} from '../tools/preHTML';
 import {FacetContainer} from '../facet-container/FacetContainer';
 import {FacetTemplate} from '../facet-template/FacetTemplate';
@@ -45,7 +44,6 @@ interface FacetInteractive {
 
 export type FacetListSelection = { [key: string]: FacetInteractiveSelection } | null;
 
-@customElement('facet-list')
 export class FacetList extends FacetContainer {
     public static get properties(): any {
         return {
@@ -300,4 +298,11 @@ export class FacetList extends FacetContainer {
         }
         return html`${result}`;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-list')) {
+    customElements.define('facet-list', FacetList);
+} else {
+    console.debug('facet-list element already defined, skipping registration');
 }

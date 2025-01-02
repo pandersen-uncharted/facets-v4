@@ -27,11 +27,9 @@ import {CSSResult, LitElement, html, css, unsafeCSS} from 'lit';
 import {render} from 'lit-html';
 import {type TemplateResult} from 'lit';
 import {isTemplateResult} from 'lit/directive-helpers.js';
-import { customElement } from 'lit/decorators.js';
 // @ts-ignore
 import FacetBlueprintStyle from './FacetBlueprint.css';
 
-@customElement('facet-blueprint')
 export class FacetBlueprint extends FacetElement {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -112,4 +110,11 @@ export class FacetBlueprint extends FacetElement {
     protected renderLayoutAdditions(): TemplateResult | void {
         return undefined;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-blueprint')) {
+    customElements.define('facet-blueprint', FacetBlueprint);
+} else {
+    console.debug('facet-blueprint element already defined, skipping registration');
 }

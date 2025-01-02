@@ -22,16 +22,17 @@
         "clean": "rm -rf ./dist",
         "start": "vite",
         "lint": "eslint . --ext .js,.ts,.jsx,.tsx --ignore-path ../../.eslintignore",
-        "prepack": "npm-run-all clean build"
+        "prepack": "yarn clean && yarn build"
     },
     "dependencies": {
         "@fortawesome/free-regular-svg-icons": "^5.10.2",
         "@fortawesome/free-solid-svg-icons": "^5.10.2",
-        "@uncharted.software/facets-core": "workspace:^",
+        "@uncharted.software/facets-core": "workspace:^4.0.0",
         "lit-element": "^2.2.1",
         "lit-html": "^1.1.2"
     },
     "devDependencies": {
+        "typescript": "^5.7.2",
         "vite": "^6.0.6",
         "vite-plugin-dts": "^4.4.0"
     }

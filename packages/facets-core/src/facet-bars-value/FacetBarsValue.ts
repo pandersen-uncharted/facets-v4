@@ -23,7 +23,6 @@
  */
 
 import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
-import { customElement } from 'lit/decorators.js';
 import {styleMap} from 'lit/directives/style-map.js';
 import {FacetBlueprint} from '../facet-blueprint/FacetBlueprint';
 import {renderButtons} from '../tools/buttons';
@@ -81,7 +80,6 @@ export interface FacetBarsValueData {
 
 export const kFacetVarsValueNullData: FacetBarsValueData = { ratio: 0 };
 
-@customElement('facet-bars-value')
 export class FacetBarsValue extends FacetBlueprint {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -269,4 +267,11 @@ export class FacetBarsValue extends FacetBlueprint {
         }
         return this.computedStyle;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-bars-value')) {
+    customElements.define('facet-bars-value', FacetBarsValue);
+} else {
+    console.debug('facet-bars-value element already defined, skipping registration');
 }

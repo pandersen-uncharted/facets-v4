@@ -22,7 +22,7 @@
         "clean": "rm -rf ./dist",
         "start": "vite",
         "lint": "eslint . --ext .js,.ts,.jsx,.tsx --ignore-path ../../.eslintignore",
-        "prepack": "npm-run-all clean build"
+        "prepack": "yarn clean && yarn build"
     },
     "dependencies": {
         "@fortawesome/free-regular-svg-icons": "^5.10.2",

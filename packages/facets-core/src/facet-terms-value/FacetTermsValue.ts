@@ -23,7 +23,6 @@
  */
 
 import {css, CSSResult, unsafeCSS, html, TemplateResult} from 'lit';
-import { customElement } from 'lit/decorators.js';
 import {FacetHoverable} from '../facet-hoverable/FacetHoverable';
 
 // @ts-ignore
@@ -67,7 +66,6 @@ const kBarStyleGenerators: {[key: string]: any} = {
 };
 const kBarStyleSuffixes = Object.keys(kBarStyleGenerators);
 
-@customElement('facet-terms-value')
 export class FacetTermsValue extends FacetHoverable {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -238,4 +236,11 @@ export class FacetTermsValue extends FacetHoverable {
         }
         return this.computedStyle;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-terms-value')) {
+    customElements.define('facet-terms-value', FacetTermsValue);
+} else {
+    console.debug('facet-terms-value element already defined, skipping registration');
 }

@@ -6,13 +6,12 @@
 
 ---  
 The Facets library is split in five packages:
-1. `css-options` is a small library used to read CSS variables in modern and legacy browsers
-2. `facets-core` contains all the components necessary to start using facets in your project
-3. `facets-plugins` is a collection of components that extend facets' behavior, look and feel
-4. `facets-docs` documentation and examples live here
-5. `facets-builder` tool to create and customize facets (under construction, Facets 4 feature)
+1. `facets-core` contains all the components necessary to start using facets in your project
+2. `facets-plugins` is a collection of components that extend facets' behavior, look and feel
+3. `facets-docs` documentation and examples live here
+4. `facets-builder` tool to create and customize facets (under construction, Facets 4+ feature)
 
-The only packages published to the registry are `css-options`, `facets-core` and `facet-plugins` 
+The only packages published to the registry are `facets-core` and `facets-plugins` 
 
 
 ## Installation

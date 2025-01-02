@@ -23,7 +23,6 @@
  */
 
 import { type TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit';
-import { customElement } from 'lit/decorators.js';
 import { FacetBarsBase, FacetBarsBaseData, kFacetBarsBaseDefaultValues } from '../facet-bars-base/FacetBarsBase';
 
 // @ts-ignore
@@ -37,7 +36,6 @@ export interface FacetBarsData {
 
 const kDefaultData: FacetBarsData = { values: kFacetBarsBaseDefaultValues };
 
-@customElement('facet-bars')
 export class FacetBars extends FacetBarsBase {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -122,4 +120,11 @@ export class FacetBars extends FacetBarsBase {
         }
         return this.computedStyle;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-bars')) {
+    customElements.define('facet-bars', FacetBars);
+} else {
+    console.debug('facet-bars element already defined, skipping registration');
 }

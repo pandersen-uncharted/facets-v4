@@ -24,7 +24,6 @@
 
 import {FacetPlugin} from '../../FacetPlugin';
 import {TemplateResult, html} from 'lit';
-import { customElement } from 'lit/decorators.js';
 import { styleMap, StyleInfo } from 'lit/directives/style-map.js';
 import {FacetTimeline} from '../../../facet-timeline/FacetTimeline';
 import {FacetBarsFilterValue, FacetBarsFilterEdge} from '../../../facet-bars-base/FacetBarsBase';
@@ -61,7 +60,6 @@ interface SelectionRenderInfo {
     userBoxStyle: StyleInfo;
 }
 
-@customElement('facet-timeline-selection')
 export class FacetTimelineSelection extends FacetPlugin {
     private facet: FacetTimeline | null = null;
     private facetRenderContent: (() => TemplateResult | void) | null = null;
@@ -777,4 +775,11 @@ export class FacetTimelineSelection extends FacetPlugin {
         }
         return false;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-timeline-selection')) {
+    customElements.define('facet-timeline-selection', FacetTimelineSelection);
+} else {
+    console.debug('facet-timeline-selection element already defined, skipping registration');
 }

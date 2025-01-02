@@ -26,7 +26,6 @@ import { FacetContainer } from '../facet-container/FacetContainer';
 import { FacetTemplate } from '../facet-template/FacetTemplate';
 import { FacetTermsValueData } from '../facet-terms-value/FacetTermsValue';
 import { css, CSSResult, html, TemplateResult, unsafeCSS } from 'lit';
-import { customElement } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { preHTML } from '../tools/preHTML';
 import { polyMatches } from '../tools/PolyMatches';
@@ -54,7 +53,6 @@ export interface FacetTermsData {
 
 const kDefaultData = { values: [] };
 
-@customElement('facet-terms')
 export class FacetTerms extends FacetContainer {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -233,4 +231,11 @@ export class FacetTerms extends FacetContainer {
             }
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-terms')) {
+    customElements.define('facet-terms', FacetTerms);
+} else {
+    console.debug('facet-terms element already defined, skipping registration');
 }

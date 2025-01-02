@@ -23,7 +23,6 @@
  */
 
 import {TemplateResult, html, CSSResult, css, unsafeCSS} from 'lit';
-import { customElement } from 'lit/decorators.js';
 import {FacetBlueprint} from '../facet-blueprint/FacetBlueprint';
 import {renderButtons} from '../tools/buttons';
 
@@ -32,7 +31,6 @@ import buttonsStyle from '../tools/buttons.css';
 // @ts-ignore
 import facetHoverableStyle from './FacetHoverable.css';
 
-@customElement('facet-hoverable')
 export class FacetHoverable extends FacetBlueprint {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -70,4 +68,11 @@ export class FacetHoverable extends FacetBlueprint {
     public constructor() {
         super();
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-hoverable')) {
+    customElements.define('facet-hoverable', FacetHoverable);
+} else {
+    console.debug('facet-hoverable element already defined, skipping registration');
 }

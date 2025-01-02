@@ -23,8 +23,7 @@
  */
 
 import {LitElement, TemplateResult, html} from 'lit';
-import { customElement } from 'lit/decorators.js';
-import {directive, Directive, PartInfo, DirectiveParameters} from 'lit/directive.js';
+import {directive, Directive} from 'lit/directive.js';
 import {MutationWrapper} from '../tools/MutationWrapper';
 
 declare global {
@@ -51,7 +50,6 @@ class XLinkDirective extends Directive {
     }
 }
 
-@customElement('facet-template')
 export class FacetTemplate extends LitElement {
     public static connectedEvent = 'facet-template-connected';
     public static disconnectedEvent = 'facet-template-disconnected';
@@ -365,4 +363,11 @@ export class FacetTemplate extends LitElement {
         }
         return value;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-template')) {
+    customElements.define('facet-template', FacetTemplate);
+} else {
+    console.debug('facet-template element already defined, skipping registration');
 }

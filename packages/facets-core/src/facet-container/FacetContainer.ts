@@ -23,7 +23,6 @@
  */
 
 import {css, CSSResult, unsafeCSS, html, TemplateResult, LitElement} from 'lit';
-import {customElement} from 'lit/decorators.js';
 import {FacetBlueprint} from '../facet-blueprint/FacetBlueprint';
 import {MutationWrapper} from '../tools/MutationWrapper';
 import {render} from 'lit-html';
@@ -31,7 +30,6 @@ import {render} from 'lit-html';
 // @ts-ignore
 import facetContainerStyle from './FacetContainer.css';
 
-@customElement('facet-container')
 export class FacetContainer extends FacetBlueprint {
     protected slottedElements: Map<string, HTMLElement> = new Map();
     private mutationObserver: MutationWrapper;
@@ -156,4 +154,11 @@ export class FacetContainer extends FacetBlueprint {
             }
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-container')) {
+    customElements.define('facet-container', FacetContainer);
+} else {
+    console.debug('facet-container element already defined, skipping registration');
 }

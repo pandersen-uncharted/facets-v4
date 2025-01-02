@@ -1424,8 +1424,8 @@ __metadata:
   dependencies:
     "@types/express": ^4.17.2
     "@types/node": ^12.12.19
-    "@uncharted.software/facets-core": "workspace:^"
-    "@uncharted.software/facets-plugins": "workspace:^"
+    "@uncharted.software/facets-core": "workspace:^4.0.0"
+    "@uncharted.software/facets-plugins": "workspace:^4.0.0"
     express: ^4.17.1
     nick-generator: ^1.0.1
     nodemon: ^2.0.2
@@ -1434,7 +1434,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@uncharted.software/facets-core@workspace:^, @uncharted.software/facets-core@workspace:^4.0.0, @uncharted.software/facets-core@workspace:packages/facets-core":
+"@uncharted.software/facets-core@workspace:^4.0.0, @uncharted.software/facets-core@workspace:packages/facets-core":
   version: 0.0.0-use.local
   resolution: "@uncharted.software/facets-core@workspace:packages/facets-core"
   dependencies:
@@ -1459,22 +1459,23 @@ __metadata:
     "@uncharted.software/facets-plugins": "workspace:^4.0.0"
     codemirror: ^6.0.1
     copyfiles: ^2.4.1
-    lit-element: ^4.1.1
-    lit-html: ^3.2.1
+    lit: ^3.2.1
     nick-generator: ^1.0.1
+    typescript: ^5.7.2
     vite: ^6.0.5
   languageName: unknown
   linkType: soft
 
-"@uncharted.software/facets-plugins@workspace:^, @uncharted.software/facets-plugins@workspace:^4.0.0, @uncharted.software/facets-plugins@workspace:packages/facets-plugins":
+"@uncharted.software/facets-plugins@workspace:^4.0.0, @uncharted.software/facets-plugins@workspace:packages/facets-plugins":
   version: 0.0.0-use.local
   resolution: "@uncharted.software/facets-plugins@workspace:packages/facets-plugins"
   dependencies:
     "@fortawesome/free-regular-svg-icons": ^5.10.2
     "@fortawesome/free-solid-svg-icons": ^5.10.2
-    "@uncharted.software/facets-core": "workspace:^"
+    "@uncharted.software/facets-core": "workspace:^4.0.0"
     lit-element: ^2.2.1
     lit-html: ^1.1.2
+    typescript: ^5.7.2
     vite: ^6.0.6
     vite-plugin-dts: ^4.4.0
   languageName: unknown
@@ -4137,7 +4138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lit-element@npm:^4.1.0, lit-element@npm:^4.1.1":
+"lit-element@npm:^4.1.0":
   version: 4.1.1
   resolution: "lit-element@npm:4.1.1"
   dependencies:
@@ -4155,7 +4156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lit-html@npm:^3.2.0, lit-html@npm:^3.2.1":
+"lit-html@npm:^3.2.0":
   version: 3.2.1
   resolution: "lit-html@npm:3.2.1"
   dependencies:

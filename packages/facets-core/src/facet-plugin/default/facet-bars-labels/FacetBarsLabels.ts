@@ -26,7 +26,6 @@ import {FacetPlugin} from '../../FacetPlugin';
 import {FacetBarsValueData} from '../../../facet-bars-value/FacetBarsValue';
 import {FacetBarsBase} from '../../../facet-bars-base/FacetBarsBase';
 import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
-import { customElement } from 'lit/decorators.js';
 
 // @ts-ignore
 import FacetBarsLabelsStyle from './FacetBarsLabels.css';
@@ -56,7 +55,6 @@ const kBooleanConverter = {
     toAttribute: (value: boolean): string => JSON.stringify(Boolean(value)),
 };
 
-@customElement('facet-bars-labels')
 export class FacetBarsLabels extends FacetPlugin {
     public static get styles(): CSSResult[] {
         return [
@@ -276,4 +274,11 @@ export class FacetBarsLabels extends FacetPlugin {
         ></div>
         `);
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-bars-labels')) {
+    customElements.define('facet-bars-labels', FacetBarsLabels);
+} else {
+    console.debug('facet-bars-labels element already defined, skipping registration');
 }
