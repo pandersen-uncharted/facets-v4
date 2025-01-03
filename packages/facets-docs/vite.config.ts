@@ -9,6 +9,12 @@ export default defineConfig({
             output: {
                 assetFileNames: '[name].[extname]'
             }
+        },
+        lib: {
+            entry: resolve(__dirname, 'src/main.ts'),
+            name: 'facetsdocs',
+            formats: ['iife'],
+            fileName: () => `iife/index.js`
         }
     },
     resolve: {

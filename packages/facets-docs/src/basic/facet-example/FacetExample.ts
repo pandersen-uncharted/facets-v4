@@ -1,5 +1,5 @@
 import { css, unsafeCSS,html, LitElement, TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { basicSetup, EditorView } from 'codemirror';
 import { html as langHtml } from '@codemirror/lang-html';
 import { css as langCss } from '@codemirror/lang-css';
@@ -9,8 +9,7 @@ import { javascript as langJavascript } from '@codemirror/lang-javascript';
 import { examples } from '../examples';
 import examplesStyle from './style.css?inline';
 
-export @customElement('facet-example')
-class FacetExample extends LitElement {
+export class FacetExample extends LitElement {
     // @ts-ignore
     @property()
     example: string = '';
@@ -149,12 +148,28 @@ class FacetExample extends LitElement {
                 </style>
             </head>
             <body>
-                ${this.editorHTML?.state.doc.toString()}
+            
                 <script>
+                    // Call the parent window's setup function
+                    if (!window.facetsdocs) {
+                        const script = document.createElement('script');
+                        script.setAttribute('type', 'text/javascript');
+                        script.setAttribute('src', 'dist/iife/index.js');
+
+                        document.body.style.visibility = 'hidden';
+                        script.addEventListener('load', function() {
+                            setTimeout(function() {
+                                document.body.style.visibility = 'visible';
+                            }, 50);
+                        });
+
+                        document.head.appendChild(script);
+                    }
                     (function() {
                         ${this.editorJS?.state.doc.toString()}
                     })();
                 </script>
+                ${this.editorHTML?.state.doc.toString()}
             </body>
             </html>
         `;
@@ -185,4 +200,11 @@ class FacetExample extends LitElement {
         const select = e.target as HTMLSelectElement;
         window.location.href = `${window.location.pathname}?ex=${select.options[select.selectedIndex].value}`;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-example')) {
+    customElements.define('facet-example', FacetExample);
+} else {
+    console.debug('facet-example element already defined, skipping registration');
 }
