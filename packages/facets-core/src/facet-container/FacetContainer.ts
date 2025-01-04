@@ -22,7 +22,7 @@
  *
  */
 
-import {css, CSSResult, unsafeCSS, html, TemplateResult, LitElement} from 'lit';
+import {css, CSSResult, unsafeCSS, html, render, TemplateResult} from 'lit';
 import {FacetBlueprint} from '../facet-blueprint/FacetBlueprint';
 import {MutationWrapper} from '../tools/MutationWrapper';
 import {render} from 'lit-html';
@@ -123,6 +123,7 @@ export class FacetContainer extends FacetBlueprint {
 
     protected renderSlottedElement(template: TemplateResult, slotted: HTMLElement): void {
         render(template, slotted, {host: this});
+        render(template, slotted);
     }
 
     private _processAddedNodes(nodes: NodeList): void {

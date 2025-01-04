@@ -77,7 +77,7 @@ export class FacetBlueprint extends FacetElement {
         if (this.renderRoot !== this) {
             const templateResult = this.renderLightDOM() as unknown;
             if (isTemplateResult(templateResult)) {
-                render(templateResult, this, {host: this});
+                render(templateResult, this);
             }
         }
         super.update(changedProperties);
