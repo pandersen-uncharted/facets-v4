@@ -25,7 +25,6 @@
 import {css, CSSResult, unsafeCSS, html, render, TemplateResult} from 'lit';
 import {FacetBlueprint} from '../facet-blueprint/FacetBlueprint';
 import {MutationWrapper} from '../tools/MutationWrapper';
-import {render} from 'lit-html';
 
 // @ts-ignore
 import facetContainerStyle from './FacetContainer.css';
@@ -122,7 +121,8 @@ export class FacetContainer extends FacetBlueprint {
     }
 
     protected renderSlottedElement(template: TemplateResult, slotted: HTMLElement): void {
-        render(template, slotted, {host: this});
+        console.log('Rendering template:', template);
+        console.log('Into slotted element:', slotted);
         render(template, slotted);
     }
 
