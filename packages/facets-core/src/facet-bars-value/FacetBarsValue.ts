@@ -257,7 +257,8 @@ export class FacetBarsValue extends FacetBlueprint {
                         styles.push(kBarStyleGenerators[kBarStyleSuffixes[ii]](hostTheme, i, optionValue));
                     }
                 }
-            } while (++i < n || hasOption);
+                console.log(`n = ${n}, i = ${i}, hasOption = ${hasOption}`);
+            } while (++i < n && !hasOption);
 
             if (styles.length) {
                 this.computedStyle = html`<style>${styles}</style>`;
