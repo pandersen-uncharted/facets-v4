@@ -7,7 +7,7 @@
 # README
 ---  
 
-For development notes see [Development](./DEVELOPMENT.md).
-For styling facets using CSS variables see [CSS Variables](./VARIABLES.md).
-For using facets in Javascript/Typescript see [Using Facets](./USING_FACETS.md).
-For running HTML examples see [Examples](https://unchartedsoftware.github.io/facets/basic.htm).
+1. For notes on developing new facets or debugging facet code see [Development](./DEVELOPMENT.md).
+2. For styling existing facets using CSS variables see [CSS Variables](./VARIABLES.md).
+3. For using facets in Javascript/Typescript see [Using Facets](./USING_FACETS.md).
+4. For running HTML examples of facets see [Examples](https://unchartedsoftware.github.io/facets/basic.htm).
