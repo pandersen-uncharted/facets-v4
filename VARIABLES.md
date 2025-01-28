@@ -13,8 +13,11 @@ This is the complete list of the CSS variables that you can set to customize fac
 | --facet-font-family | The font family used by the facets. i.e. CSS `font-family`.<br>NOTE: Font sizes cannot be changed. | "IBM Plex Sans", sans-serif |
 | --facet-blueprint-background | The background color for the facets. i.e. CSS `background-color`. | #FFFFFF |
 | --facet-blueprint-border | The color of the top border (divider) for facets. i.e. `border-top` color.<br>NOTE: The divider is a fixed solid 1px line. There are no variables to change this. | #D9DADB |
-| --facet-container-surface-foreground | The foreground color (text color) of the facet. i.e. `color`. | #1A1B1C |
+| --facet-container-surface-foreground | The foreground color (text color) of the facet title. i.e. `color`. | #1A1B1C |
 | **facet-bars** | *Variables that only apply to `facet-bars` facets.* |
+| --facet-bars-labels-foreground | The text color of individual bar labels. | #B2B3B4 |
+| --facet-bars-labels-tick-background | The background color of bar ticks. | #B2B3B4 |
+| --facet-bars-labels-marker-border | The label marker border color. | #D9DADB |
 | --facet-bars-blueprint-border | The color assigned to the vertical hover highlight bar that appears when hovering over `facet-bars`. i.e. `border-left` color<BR>NOTE: The bar is a fixed 4px solid line. | #255DCC |
 | --facet-bars-value-loading-background-stop-1 | `facet-bars` can be used to create a 'loading' animation. This is the background color at 0%.<br>NOTE: There do not appear to be examples of using this. | #F7F7F7 |
 | --facet-bars-value-loading-background-stop-2 | `facet-bars` can be used to create a 'loading' animation. This is the background color at 50%.<br>NOTE: There do not appear to be examples of using this. | #F3F3F3|
@@ -44,6 +47,9 @@ This is the complete list of the CSS variables that you can set to customize fac
 | --facet-bars-0-muted-contrast | The muted contrast color. | #D9DADB |
 | --facet-bars-0-muted-contrast-hover | The muted contrast color during hover. | #255DCC |
 | **facet-terms** | *Variables that only apply to `facet-terms` facets.* |
+| --facet-term-label | The text color of the individual term facet labels. | #1A1B1C |
+| --face-term-annotation | The text color of the individual term annotations. | #727375 |
+| --facet-term-value | The text color of the individual term values. | #1A1B1C |
 | --facet-terms-tick-color | The hover tick color. This appears to be the color of the hover indicator at the left of a term facet, similar to `--facet-bars-blueprint-border` above. i.e. `border-left` color<BR>NOTE: The bar is a fixed 4px solid line.| #255DCC |
 | --facet-blueprint-hover-background | The background color while hovering over a term. | #F7F7F7 |
 | --facet-terms-selected-background | The background color or a selected term. | #EBF1FC |
