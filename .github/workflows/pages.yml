@@ -26,9 +26,6 @@ jobs:
             - name: install
               run: yarn install
 
-            - name: clean
-              run: yarn clean
-
             - name: lint
               run: yarn lint
 
