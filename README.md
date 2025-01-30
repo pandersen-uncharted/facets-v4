@@ -4,8 +4,9 @@
 
 </div>
 
-# README
----  
+# Facets - Web Components
+
+Facets provides a set of Web Components (framework-agnostic) for 'faceting' your data, i.e. displaying bucketed data and providing the interactions with which to select and filter it.
 
 1. For using facets in Javascript/Typescript see [Using Facets](./USING_FACETS.md).
 2. For styling existing facets using CSS variables see [CSS Variables](./VARIABLES.md).
