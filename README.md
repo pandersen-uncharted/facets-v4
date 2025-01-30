@@ -1,4 +1,4 @@
-<div align="center">
+<div style="text-align: center;">
 
 ![Uncharted Facets](assets/logo_320.png)
 
@@ -11,3 +11,7 @@
 2. For styling existing facets using CSS variables see [CSS Variables](./VARIABLES.md).
 3. For using facets in Javascript/Typescript see [Using Facets](./USING_FACETS.md).
 4. For running HTML examples of facets see [Examples](https://unchartedsoftware.github.io/facets/basic.htm).
+
+### Note on Browser Support
+
+Facets 3.x supported old browsers such as IE that didn't support CCS variables. 4.x drops support for those older browsers.
