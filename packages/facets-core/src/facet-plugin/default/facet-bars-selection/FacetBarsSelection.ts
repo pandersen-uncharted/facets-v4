@@ -23,7 +23,7 @@
  */
 
 import {FacetPlugin} from '../../FacetPlugin';
-import {customElement, TemplateResult, html} from 'lit-element';
+import {TemplateResult, html} from 'lit';
 import {FacetBarsBase} from '../../../facet-bars-base/FacetBarsBase';
 
 // @ts-ignore
@@ -38,7 +38,6 @@ interface SelectionMouse {
     offset: number;
 }
 
-@customElement('facet-bars-selection')
 export class FacetBarsSelection extends FacetPlugin {
     private facet: FacetBarsBase | null = null;
     private facetRenderValues: (() => TemplateResult | void) | null = null;
@@ -87,7 +86,7 @@ export class FacetBarsSelection extends FacetPlugin {
         }
     }
 
-    protected createRenderRoot(): Element | ShadowRoot {
+    protected createRenderRoot(): HTMLElement | DocumentFragment {
         return this;
     }
 
@@ -333,4 +332,11 @@ export class FacetBarsSelection extends FacetPlugin {
             this.facetRenderValues = null;
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-bars-selection')) {
+    customElements.define('facet-bars-selection', FacetBarsSelection);
+} else {
+    console.debug('facet-bars-selection element already defined, skipping registration');
 }

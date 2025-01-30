@@ -22,9 +22,10 @@
  *
  */
 
-import {css, CSSResult, customElement, html, TemplateResult, unsafeCSS} from 'lit-element';
-import { styleMap } from 'lit-html/directives/style-map';
-import { classMap } from 'lit-html/directives/class-map';
+import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
+import { classMap } from 'lit/directives/class-map.js';
 import {FacetPlugin, FacetBarsBase} from '@uncharted.software/facets-core';
 
 // @ts-ignore

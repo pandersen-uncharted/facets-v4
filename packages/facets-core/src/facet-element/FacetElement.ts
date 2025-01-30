@@ -22,18 +22,15 @@
  *
  */
 
-import {CSSResult, customElement, LitElement, TemplateResult} from 'lit-element';
-import {CSSOptions} from '@uncharted.software/css-options';
+import {CSSResult, LitElement, TemplateResult} from 'lit';
 import {FacetPlugin} from '../facet-plugin/FacetPlugin';
 import {FacetTemplate} from '../facet-template/FacetTemplate';
 
-@customElement('facet-element')
 export class FacetElement extends LitElement {
-    protected cssOptions: CSSOptions;
     protected plugins: Set<FacetPlugin> = new Set();
     protected templates: Map<string, FacetTemplate> = new Map();
 
-    private boundAddOnEventHandler: EventHandlerNonNull = this._addOnEventHandler.bind(this);
+    private boundAddOnEventHandler: EventListener = this._addOnEventHandler.bind(this);
 
     public static get styles(): CSSResult[] {
         return [];
@@ -53,7 +50,6 @@ export class FacetElement extends LitElement {
 
     public constructor() {
         super();
-        this.cssOptions = new CSSOptions(this);
     }
 
     public connectedCallback(): void {
@@ -106,7 +102,7 @@ export class FacetElement extends LitElement {
         return undefined;
     }
 
-    protected createRenderRoot(): Element | ShadowRoot {
+    protected createRenderRoot(): HTMLElement | DocumentFragment {
         const useShadowDOM = this.getAttribute('use-shadow-dom');
         if (useShadowDOM && useShadowDOM.toLowerCase() === 'false') {
             return this;
@@ -167,4 +163,11 @@ export class FacetElement extends LitElement {
             }
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-element')) {
+    customElements.define('facet-element', FacetElement);
+} else {
+    console.debug('facet-element element already defined, skipping registration');
 }

@@ -23,11 +23,13 @@
  */
 
 import {FacetElement} from '../facet-element/FacetElement';
-import {LitElement, CSSResult, TemplateResult, html, css, unsafeCSS, customElement} from 'lit-element';
+import {CSSResult, LitElement, html, css, unsafeCSS} from 'lit';
+import {render} from 'lit-html';
+import {type TemplateResult} from 'lit';
+import {isTemplateResult} from 'lit/directive-helpers.js';
 // @ts-ignore
 import FacetBlueprintStyle from './FacetBlueprint.css';
 
-@customElement('facet-blueprint')
 export class FacetBlueprint extends FacetElement {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -47,7 +49,7 @@ export class FacetBlueprint extends FacetElement {
         }
 
         return html`
-            ${this.cssOptions.supportsCSSVars ? undefined : this.computeStyle()}
+            ${this.computeStyle()}
             <div class="facet-blueprint">
                 <div class="facet-blueprint-header">
                     ${slots.has('header') ? html`<slot name="header"></slot>` : this.renderHeader()}
@@ -74,12 +76,8 @@ export class FacetBlueprint extends FacetElement {
     protected update(changedProperties: Map<PropertyKey, unknown>): void {
         if (this.renderRoot !== this) {
             const templateResult = this.renderLightDOM() as unknown;
-            if (templateResult instanceof TemplateResult) {
-                (this.constructor as typeof LitElement)
-                    .render(
-                        templateResult,
-                        this,
-                        {scopeName: this.localName, eventContext: this});
+            if (isTemplateResult(templateResult)) {
+                render(templateResult, this);
             }
         }
         super.update(changedProperties);
@@ -112,4 +110,11 @@ export class FacetBlueprint extends FacetElement {
     protected renderLayoutAdditions(): TemplateResult | void {
         return undefined;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-blueprint')) {
+    customElements.define('facet-blueprint', FacetBlueprint);
+} else {
+    console.debug('facet-blueprint element already defined, skipping registration');
 }

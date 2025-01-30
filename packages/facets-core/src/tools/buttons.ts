@@ -22,7 +22,7 @@
  *
  */
 
-import {html, TemplateResult} from 'lit-element';
+import {html, TemplateResult} from 'lit';
 
 import {makeIconSVG} from './faIcons';
 import {faEye} from '@fortawesome/free-solid-svg-icons/faEye';

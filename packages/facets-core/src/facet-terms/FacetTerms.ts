@@ -25,8 +25,8 @@
 import { FacetContainer } from '../facet-container/FacetContainer';
 import { FacetTemplate } from '../facet-template/FacetTemplate';
 import { FacetTermsValueData } from '../facet-terms-value/FacetTermsValue';
-import { css, CSSResult, customElement, html, TemplateResult, unsafeCSS } from 'lit-element';
-import { repeat } from 'lit-html/directives/repeat';
+import { css, CSSResult, html, TemplateResult, unsafeCSS } from 'lit';
+import { repeat } from 'lit/directives/repeat.js';
 import { preHTML } from '../tools/preHTML';
 import { polyMatches } from '../tools/PolyMatches';
 
@@ -53,7 +53,6 @@ export interface FacetTermsData {
 
 const kDefaultData = { values: [] };
 
-@customElement('facet-terms')
 export class FacetTerms extends FacetContainer {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -152,7 +151,7 @@ export class FacetTerms extends FacetContainer {
                 const values = this.computeValuesArray(value, subselection);
                 const template = this.templates.get(type);
                 if (template) {
-                    return template.getHTML(value, {
+                    return template.generateTemplate(value, {
                         'id': key,
                         'action-buttons': this.actionButtons,
                         'state': state,
@@ -232,4 +231,11 @@ export class FacetTerms extends FacetContainer {
             }
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-terms')) {
+    customElements.define('facet-terms', FacetTerms);
+} else {
+    console.debug('facet-terms element already defined, skipping registration');
 }

@@ -22,6 +22,10 @@
  *
  */
 
+:root {
+
+}
+
 .facet-timeline-filter-handle-track {
     height: 16px;
     pointer-events: none;
@@ -56,9 +60,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    border-top: 2px solid #FFC107;
-    border-left: 2px solid #FFC107;
-    border-right: 2px solid #FFC107;
+    border-top: 2px solid var(--facet-timeline-filter-computed-border, #FFC107);
+    border-left: 2px solid var(--facet-timeline-filter-computed-border, #FFC107);
+    border-right: 2px solid var(--facet-timeline-filter-computed-border, #FFC107);
     z-index: 2;
 }
 
@@ -82,7 +86,7 @@
     cursor: ew-resize;
     pointer-events: all;
 
-    background-color: #FFC107;
+    background-color: var(--facet-timeline-filter-handle-background, #FFC107);
 
     z-index: 1;
 }
@@ -93,8 +97,8 @@
     top: 3px;
     bottom: 3px;
     width: 1px;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
+    border-left: 1px solid var(--facet-timeline-filter-handle-border, white);
+    border-right: 1px solid var(--facet-timeline-filter-handle-border, white);
 }
 
 .facet-timeline-filter-handle-left {
@@ -119,8 +123,8 @@
     position: absolute;
     top: 2px;
 
-    color: #050D5C;
-    font-family: "IBM Plex Sans", sans-serif;
+    color: var(--facet-timeline-date-foreground, #050D5C);
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -144,7 +148,7 @@
 
 .facet-timeline-selection-user {
     position: absolute;
-    border: 1px dashed black;
+    border: 1px dashed var(--facet-timeline-selection-user-border, black);
     pointer-events: none;
     user-select: none;
     -ms-user-select: none;
@@ -153,8 +157,8 @@
 
 .facet-timeline-selection-computed {
     position: absolute;
-    background-color: rgba(37,93,204, 0.15);
-    border: 1px solid #255DCC;
+    background-color: var(--facet-timeline-selection-computed-background, rgba(37,93,204, 0.15));
+    border: 1px solid var(--facet-timeline-selection-computed-border, #255DCC);
     pointer-events: none;
     user-select: none;
     -ms-user-select: none;
@@ -166,13 +170,13 @@
 }
 :host([filter-handle-track=false]) .facet-timeline-date-label {
     text-shadow:
-        -.5px -.5px 0 white,
-        .5px -.5px 0 white,
-        -.5px .5px 0 white,
-        .5px .5px 0 white;
+        -.5px -.5px 0 var(--facet-timeline-date-label-text-shadow, white),
+        .5px -.5px 0 var(--facet-timeline-date-label-text-shadow, white),
+        -.5px .5px 0 var(--facet-timeline-date-label-text-shadow, white),
+        .5px .5px 0 var(--facet-timeline-date-label-text-shadow, white);
 }
 :host([filter-labels-interactive=false]) .facet-timeline-date-label {
-    color: black;
+    color: var(--facet-timeline-date-label-forground, black);
     pointer-events: none;
     font-size: 10px;
 }

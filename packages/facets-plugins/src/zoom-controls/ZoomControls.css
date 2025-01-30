@@ -37,8 +37,8 @@
 .zoom-controls-button {
     width: 16px;
     height: 16px;
-    border: 1px solid #A7A7A8;
-    background-color: #F0F1F2;
+    border: 1px solid var(--facets-plugins-zoom-controls-button-border, #A7A7A8);
+    background-color: var(--facets-plugins-zoom-controls-button-background, #F0F1F2);
     display: flex;
     align-items: center;
     justify-content: center;

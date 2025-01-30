@@ -22,7 +22,7 @@
  *
  */
 
-import {FacetExample} from './facet-example/FacetExample';
+import {FacetExample} from './facet-example/FacetExample.ts';
 
 export function bootstrap(): void {
     const params = new URLSearchParams(window.location.search);

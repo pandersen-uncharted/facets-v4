@@ -22,14 +22,13 @@
  *
  */
 
-import {css, CSSResult, customElement, unsafeCSS, html, TemplateResult, LitElement} from 'lit-element';
+import {css, CSSResult, unsafeCSS, html, render, TemplateResult} from 'lit';
 import {FacetBlueprint} from '../facet-blueprint/FacetBlueprint';
 import {MutationWrapper} from '../tools/MutationWrapper';
 
 // @ts-ignore
 import facetContainerStyle from './FacetContainer.css';
 
-@customElement('facet-container')
 export class FacetContainer extends FacetBlueprint {
     protected slottedElements: Map<string, HTMLElement> = new Map();
     private mutationObserver: MutationWrapper;
@@ -122,11 +121,9 @@ export class FacetContainer extends FacetBlueprint {
     }
 
     protected renderSlottedElement(template: TemplateResult, slotted: HTMLElement): void {
-        (this.constructor as typeof LitElement)
-            .render(
-                template,
-                slotted,
-                {scopeName: this.localName, eventContext: this});
+        console.log('Rendering template:', template);
+        console.log('Into slotted element:', slotted);
+        render(template, slotted);
     }
 
     private _processAddedNodes(nodes: NodeList): void {
@@ -158,4 +155,11 @@ export class FacetContainer extends FacetBlueprint {
             }
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-container')) {
+    customElements.define('facet-container', FacetContainer);
+} else {
+    console.debug('facet-container element already defined, skipping registration');
 }

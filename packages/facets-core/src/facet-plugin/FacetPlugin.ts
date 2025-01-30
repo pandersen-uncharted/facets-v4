@@ -22,14 +22,13 @@
  *
  */
 
-import {customElement, LitElement} from 'lit-element';
+import {LitElement} from 'lit';
 
-@customElement('facet-plugin')
 export class FacetPlugin extends LitElement {
     public static connectedEvent = 'facet-plugin-connected';
     public static disconnectedEvent = 'facet-plugin-disconnected';
 
-    private _boundUpdateHandler: EventHandlerNonNull = this._updateHandler.bind(this);
+    private _boundUpdateHandler: EventListener = this._updateHandler.bind(this);
 
     private _host: LitElement|null = null;
     public get host(): LitElement|null {
@@ -99,4 +98,11 @@ export class FacetPlugin extends LitElement {
             this.hostUpdated(event.detail.changedProperties);
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-plugin')) {
+    customElements.define('facet-plugin', FacetPlugin);
+} else {
+    console.debug('facet-plugin element already defined, skipping registration');
 }

@@ -1,12 +1,15 @@
 {
     "compilerOptions": {
         "experimentalDecorators": true,
+        "useDefineForClassFields": false,
+        "emitDecoratorMetadata": true,
         "sourceMap": true,
         "moduleResolution": "node",
         "module": "esnext",
         "target": "esnext",
         "lib": ["esnext", "dom"],
         "declaration": true,
-        "declarationMap": true
+        "declarationMap": true,
+        "forceConsistentCasingInFileNames": true
     }
 }

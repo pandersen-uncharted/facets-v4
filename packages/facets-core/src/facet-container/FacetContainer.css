@@ -23,14 +23,14 @@
  */
 
 .facet-blueprint {
-    border-top: 1px solid #D9DADB;
-    background-color: #FFFFFF;
+    border-top: 1px solid var(--facet-blueprint-border, #D9DADB);
+    background-color: var(--facet-blueprint-background, #FFFFFF);
 }
 
 .facet-container-header {
     height: 20px;
-    color: #1A1B1C;
-    font-family: "IBM Plex Sans", sans-serif;
+    color: var(--facet-container-surface-foreground, #1A1B1C);
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -44,8 +44,8 @@
 
 .facet-container-footer {
     height: 20px;
-    color: #1A1B1C;
-    font-family: "IBM Plex Sans", sans-serif;
+    color: var(--facet-container-surface-foreground, #1A1B1C);
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 10px;
     font-style: normal;
     font-weight: 600;

@@ -22,7 +22,7 @@
  *
  */
 
-import { customElement, TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit-element';
+import { type TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit';
 import { FacetBarsBase, FacetBarsBaseData, kFacetBarsBaseDefaultValues } from '../facet-bars-base/FacetBarsBase';
 
 // @ts-ignore
@@ -36,7 +36,6 @@ export interface FacetBarsData {
 
 const kDefaultData: FacetBarsData = { values: kFacetBarsBaseDefaultValues };
 
-@customElement('facet-bars')
 export class FacetBars extends FacetBarsBase {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -106,10 +105,9 @@ export class FacetBars extends FacetBarsBase {
             const theme = this.getAttribute('theme');
             const hostTheme = theme ? `[theme="${theme}"]` : ':not([theme])';
 
-            const cssOptions = this.cssOptions;
             const styles = [];
 
-            const tickValue = cssOptions.read('facet-bars-tick-color');
+            const tickValue = getComputedStyle(this).getPropertyValue('--facet-bars-tick-color').trim();
             if (tickValue !== undefined) {
                 styles.push(`:host(${hostTheme}:hover) .facet-blueprint .facet-blueprint-left { border-left: 4px solid ${tickValue}; }`);
             }
@@ -122,4 +120,11 @@ export class FacetBars extends FacetBarsBase {
         }
         return this.computedStyle;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-bars')) {
+    customElements.define('facet-bars', FacetBars);
+} else {
+    console.debug('facet-bars element already defined, skipping registration');
 }

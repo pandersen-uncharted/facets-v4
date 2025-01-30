@@ -22,11 +22,15 @@
  *
  */
 
-'use strict';
+import * as Facets from '@uncharted.software/facets-core';
+export {Facets};
 
-const generator = require('../../rollup.config.generator');
-const pkg = require('./package.json');
+import * as Plugins from '@uncharted.software/facets-plugins';
+export {Plugins};
 
-const config = generator(pkg, __dirname);
+import {bootstrap} from './basic/ExampleBootstrap';
 
-module.exports = config;
+window.addEventListener('DOMContentLoaded', function() {
+    bootstrap();
+});
+

@@ -44,7 +44,7 @@
 }
 
 .histogram-header {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans") sans-serif;
     font-size: 14px;
     line-height: 16px;
     margin: 5px;
@@ -69,7 +69,7 @@
 }
 
 .inspired-header {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans") sans-serif;
     font-size: 14px;
     line-height: 35px;
     height: 35px;
@@ -89,7 +89,7 @@
     height: 45px;
     color: white;
 
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans") sans-serif;
     font-size: 28px;
     line-height: 45px;
 

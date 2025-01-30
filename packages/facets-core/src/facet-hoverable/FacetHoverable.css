@@ -23,7 +23,7 @@
  */
 
 .facet-blueprint {
-    background-color: #FFFFFF;
+    background-color: var(--facet-blueprint-background, #FFFFFF);
     transition: background-color 256ms;
     position: relative;
 }
