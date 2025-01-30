@@ -77,7 +77,7 @@ npm login --registry https://npm.uncharted.software --scope @uncharted
  ```shell script
 
 cd ../facets-core
-yarn publish
+npm publish
 cd ../facets-plugins
-yarn publish
+npm publish
 ```
