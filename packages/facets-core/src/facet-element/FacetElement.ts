@@ -67,8 +67,8 @@ export class FacetElement extends LitElement {
         this.dispatchEvent(new CustomEvent('facet-element-updated', {
             bubbles: false,
             detail: {
-                changedProperties: _changedProperties,
-            },
+                changedProperties: _changedProperties
+            }
         }));
     }
 
@@ -138,7 +138,7 @@ export class FacetElement extends LitElement {
 
     private _addOnEventHandler(evt: Event): void {
         if (evt instanceof CustomEvent) {
-            if (evt.detail.hasOwnProperty('plugin')) {
+            if (Object.prototype.hasOwnProperty.call(evt.detail, 'plugin')) {
                 const plugin = evt.detail.plugin;
                 if (plugin instanceof FacetPlugin) {
                     if (evt.type === FacetPlugin.connectedEvent) {
@@ -149,7 +149,7 @@ export class FacetElement extends LitElement {
                         evt.stopPropagation();
                     }
                 }
-            } else if (evt.detail.hasOwnProperty('template')) {
+            } else if (Object.prototype.hasOwnProperty.call(evt.detail, 'template')) {
                 const template = evt.detail.template;
                 if (template instanceof FacetTemplate) {
                     if (evt.type === FacetTemplate.connectedEvent) {
@@ -168,6 +168,4 @@ export class FacetElement extends LitElement {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-element')) {
     customElements.define('facet-element', FacetElement);
-} else {
-    console.debug('facet-element element already defined, skipping registration');
 }

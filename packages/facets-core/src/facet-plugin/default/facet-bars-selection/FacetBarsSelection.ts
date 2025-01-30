@@ -50,7 +50,7 @@ export class FacetBarsSelection extends FacetPlugin {
         startY: 0,
         endX: 0,
         endY: 0,
-        offset: 0,
+        offset: 0
     };
 
     protected hostUpdated(changedProperties: Map<PropertyKey, unknown>): void {
@@ -337,6 +337,4 @@ export class FacetBarsSelection extends FacetPlugin {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-bars-selection')) {
     customElements.define('facet-bars-selection', FacetBarsSelection);
-} else {
-    console.debug('facet-bars-selection element already defined, skipping registration');
 }

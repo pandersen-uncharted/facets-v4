@@ -48,17 +48,17 @@ const kBooleanConverter = {
     fromAttribute: (value: string): boolean => {
         try {
             return JSON.parse(value);
-        } catch (e) {
+        } catch (_error) {
             return Boolean(value);
         }
     },
-    toAttribute: (value: boolean): string => JSON.stringify(Boolean(value)),
+    toAttribute: (value: boolean): string => JSON.stringify(Boolean(value))
 };
 
 export class FacetBarsLabels extends FacetPlugin {
     public static get styles(): CSSResult[] {
         return [
-            css`${unsafeCSS(FacetBarsLabelsStyle)}`,
+            css`${unsafeCSS(FacetBarsLabelsStyle)}`
         ];
     }
 
@@ -67,13 +67,13 @@ export class FacetBarsLabels extends FacetPlugin {
             automaticLabels: {
                 type: Boolean,
                 attribute: 'automatic-labels',
-                converter: kBooleanConverter,
+                converter: kBooleanConverter
             },
             drawDelimiters: {
                 type: Boolean,
                 attribute: 'draw-delimiters',
-                converter: kBooleanConverter,
-            },
+                converter: kBooleanConverter
+            }
         };
     }
 
@@ -154,7 +154,7 @@ export class FacetBarsLabels extends FacetPlugin {
                         ticks: [],
                         labels: [],
                         sections: [],
-                        section: null,
+                        section: null
                     });
                 }
 
@@ -169,7 +169,7 @@ export class FacetBarsLabels extends FacetPlugin {
                     row.section = {
                         label,
                         min: barIndex,
-                        max: barIndex + 1,
+                        max: barIndex + 1
                     };
                     row.sections.push(row.section);
                     if (label && this.drawDelimiters && barIndex >= 0) {
@@ -279,6 +279,4 @@ export class FacetBarsLabels extends FacetPlugin {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-bars-labels')) {
     customElements.define('facet-bars-labels', FacetBarsLabels);
-} else {
-    console.debug('facet-bars-labels element already defined, skipping registration');
 }

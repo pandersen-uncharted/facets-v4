@@ -33,13 +33,13 @@ import ZoomBarStyle from './ZoomBar.css';
 export class ZoomBar extends FacetPlugin {
     public static get styles(): CSSResult[] {
         return [
-            css`${unsafeCSS(ZoomBarStyle)}`,
+            css`${unsafeCSS(ZoomBarStyle)}`
         ];
     }
 
     public static get properties(): any {
         return {
-            enabled: { type: Object },
+            enabled: { type: Object }
         };
     }
 

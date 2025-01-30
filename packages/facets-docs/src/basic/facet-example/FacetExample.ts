@@ -1,4 +1,4 @@
-import { css, unsafeCSS,html, LitElement, TemplateResult } from 'lit';
+import { css, unsafeCSS, html, LitElement, TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 import { basicSetup, EditorView } from 'codemirror';
 import { html as langHtml } from '@codemirror/lang-html';
@@ -7,6 +7,7 @@ import { javascript as langJavascript } from '@codemirror/lang-javascript';
 
 
 import { examples } from '../examples';
+// @ts-ignore
 import examplesStyle from './style.css?inline';
 
 export class FacetExample extends LitElement {
@@ -114,9 +115,9 @@ export class FacetExample extends LitElement {
                 doc: content,
                 extensions: [
                     basicSetup,
-                    lang(),
+                    lang()
                 ],
-                parent: container,
+                parent: container
             });
         };
 
@@ -129,7 +130,7 @@ export class FacetExample extends LitElement {
     private _updateSelect(): void {
         const select = this.renderRoot.querySelector('#facet-example-select') as HTMLSelectElement;
         if (select) {
-            const selectedExample = examples.hasOwnProperty(this.example) ? this.example : null;
+            const selectedExample = Object.prototype.hasOwnProperty.call(examples, this.example) ? this.example : null;
             const exampleNames = Object.keys(examples);
             select.selectedIndex = selectedExample ? exampleNames.indexOf(selectedExample) + 1 : 0;
         }
@@ -148,7 +149,7 @@ export class FacetExample extends LitElement {
                 </style>
             </head>
             <body>
-            
+
                 <script>
                     // Call the parent window's setup function
                     if (!window.facetsdocs) {
@@ -205,6 +206,4 @@ export class FacetExample extends LitElement {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-example')) {
     customElements.define('facet-example', FacetExample);
-} else {
-    console.debug('facet-example element already defined, skipping registration');
 }

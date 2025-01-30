@@ -62,7 +62,7 @@ const kBarStyleGenerators: {[key: string]: any} = {
     '-muted-contrast': (theme: string, index: number, value: string): string =>
         `${getBarColorHostSelector(theme, 'muted', index, true, false)} { background-color:${value} }`,
     '-muted-contrast-hover': (theme: string, index: number, value: string): string =>
-        `${getBarColorHostSelector(theme, 'muted', index, true, true)} { background-color:${value} }`,
+        `${getBarColorHostSelector(theme, 'muted', index, true, true)} { background-color:${value} }`
 };
 const kBarStyleSuffixes = Object.keys(kBarStyleGenerators);
 
@@ -134,9 +134,9 @@ export class FacetTermsValue extends FacetHoverable {
                         }
                         return arr;
                     },
-                    toAttribute: (value: number): string => `[${value.toString()}]`,
-                },
-            },
+                    toAttribute: (value: number): string => `[${value.toString()}]`
+                }
+            }
         };
     }
 
@@ -241,6 +241,4 @@ export class FacetTermsValue extends FacetHoverable {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-terms-value')) {
     customElements.define('facet-terms-value', FacetTermsValue);
-} else {
-    console.debug('facet-terms-value element already defined, skipping registration');
 }

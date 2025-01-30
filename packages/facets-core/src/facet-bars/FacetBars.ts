@@ -48,7 +48,7 @@ export class FacetBars extends FacetBarsBase {
     public static get properties(): any {
         return {
             data: { type: Object },
-            disabled: { type: Boolean },
+            disabled: { type: Boolean }
         };
     }
 
@@ -125,6 +125,4 @@ export class FacetBars extends FacetBarsBase {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-bars')) {
     customElements.define('facet-bars', FacetBars);
-} else {
-    console.debug('facet-bars element already defined, skipping registration');
 }

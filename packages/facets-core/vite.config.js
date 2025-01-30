@@ -3,14 +3,13 @@ import { defineConfig } from 'vite';
 import litCss from 'vite-plugin-lit-css';
 import dts from 'vite-plugin-dts';
 
-export default defineConfig
-({
+export default defineConfig({
     plugins: [
         dts({
             include: ['src/**/*'],
-            rollupTypes: true
+            rollupTypes: true,
         }),
-        litCss()
+        litCss(),
     ],
     build: {
         lib: {
@@ -19,7 +18,7 @@ export default defineConfig
             // the proper extensions will be added
 
             fileName: 'index',
-            formats: ['es', 'cjs', 'umd']
-        }
+            formats: ['es', 'cjs', 'umd'],
+        },
     },
-})
+});

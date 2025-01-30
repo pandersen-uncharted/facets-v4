@@ -82,41 +82,41 @@ export const examples: Record<string, any> = {
     'facet-blueprint': {
         html: blueprintHTML,
         css: blueprintCSS,
-        js: blueprintJS,
+        js: blueprintJS
     },
     'facet-terms': {
         html: termHTML,
         css: termCSS,
-        js: termJS,
+        js: termJS
     },
     'facet-bars': {
         html: barsHTML,
         css: barsCSS,
-        js: barsJS,
+        js: barsJS
     },
     'facet-timeline': {
         html: timelineHTML,
         css: timelineCSS,
-        js: timelineJS,
+        js: timelineJS
     },
     'facet-list': {
         html: listHTML,
         css: listCSS,
-        js: listJS,
+        js: listJS
     },
     'facet-template': {
         html: templateHTML,
         css: templateCSS,
-        js: templateJS,
+        js: templateJS
     },
     'facet-plugin': {
         html: pluginHTML,
         css: pluginCSS,
-        js: pluginJS,
+        js: pluginJS
     },
     'build-a-facet': {
         html: buildHTML,
         css: buildCSS,
-        js: buildJS,
-    },
+        js: buildJS
+    }
 };

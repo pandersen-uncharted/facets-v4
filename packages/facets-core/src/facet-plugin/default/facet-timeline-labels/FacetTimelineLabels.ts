@@ -39,7 +39,7 @@ export class FacetTimelineLabels extends FacetPlugin {
 
     public static get styles(): CSSResult[] {
         return [
-            css`${unsafeCSS(FacetTimelineLabelsStyle)}`,
+            css`${unsafeCSS(FacetTimelineLabelsStyle)}`
         ];
     }
 
@@ -190,6 +190,4 @@ export class FacetTimelineLabels extends FacetPlugin {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-timeline-labels')) {
     customElements.define('facet-timeline-labels', FacetTimelineLabels);
-} else {
-    console.debug('facet-timeline-labels element already defined, skipping registration');
 }

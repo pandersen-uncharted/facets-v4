@@ -121,8 +121,6 @@ export class FacetContainer extends FacetBlueprint {
     }
 
     protected renderSlottedElement(template: TemplateResult, slotted: HTMLElement): void {
-        console.log('Rendering template:', template);
-        console.log('Into slotted element:', slotted);
         render(template, slotted);
     }
 
@@ -160,6 +158,4 @@ export class FacetContainer extends FacetBlueprint {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-container')) {
     customElements.define('facet-container', FacetContainer);
-} else {
-    console.debug('facet-container element already defined, skipping registration');
 }
