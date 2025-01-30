@@ -1,6 +1,7 @@
 {
     "name": "root",
     "private": true,
+    "version": "4.0.1",
     "type": "module",
     "scripts": {
         "build": "yarn workspaces foreach -ptv --all run build",
@@ -8,7 +9,8 @@
         "lint:fix": "yarn workspaces foreach -ptv --all run lint:fix",
         "test": "yarn workspaces foreach -ptv --all run test",
         "prePush": "yarn run lint && yarn run test",
-        "bump": "yarn version check --interactive && yarn version apply"
+        "bump": "yarn version ${0} && yarn bump:workspaces",
+        "bump:workspaces": "yarn workspaces foreach -A run bump-to $npm_package_version"
     },
     "devDependencies": {
         "@types/resize-observer-browser": "0.1.1",

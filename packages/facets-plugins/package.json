@@ -1,6 +1,6 @@
 {
     "name": "@uncharted.software/facets-plugins",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "license": "MIT",
     "type": "module",
     "main": "./dist/index.cjs",
@@ -23,12 +23,13 @@
         "start": "vite",
         "lint": "eslint .",
         "lint:fix": "yarn lint --fix",
-        "prepack": "yarn clean && yarn build"
+        "prepack": "yarn clean && yarn build",
+        "bump-to": "yarn version"
     },
     "dependencies": {
         "@fortawesome/free-regular-svg-icons": "5.15.4",
         "@fortawesome/free-solid-svg-icons": "5.15.4",
-        "@uncharted.software/facets-core": "workspace:^4.0.0",
+        "@uncharted.software/facets-core": "workspace:^4.0.1",
         "lit-element": "2.5.1",
         "lit-html": "1.4.1"
     },

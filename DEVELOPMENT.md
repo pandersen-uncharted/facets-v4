@@ -58,26 +58,27 @@ and have everything update automatically but I've not had success with that.)
 
 
 ## Publish
-**NOTE: This has not been verified to work.**
 
-- Bump the package versions
+From the root of the repo:
+
+- Bump the package versions. 'patch' is an example. use the yarn [options](https://yarnpkg.com/cli/version), such as `patch | minor | major | prerelease`
 ```shell script
-yarn bump
+yarn bump patch
 ```
+
 - One <strong>must</strong> have an npm account that belongs to the uncharted organization and be logged into the npm scope
-- Run npm whoami to confirm npm is logged in (if not follow the prompts)
+- To verify:
 ```shell script
-npm whoami
+yarn npm whoami
 ```
-- Log into the uncharted npm scope
+
+- Log into the uncharted npm registry for publishing (see `.yarnrc.yml` > `npmPublishRegistry`)
 ```shell script
-npm login --registry https://npm.uncharted.software --scope @uncharted
+yarn npm login --publish
 ```
+
 - Individually publish facets-core and facets-plugins
  ```shell script
-
-cd ../facets-core
-npm publish
-cd ../facets-plugins
-npm publish
+yarn workspace @uncharted.software/facets-core npm publish
+yarn workspace @uncharted.software/facets-plugins npm publish
 ```
