@@ -75,7 +75,7 @@ export class FacetTimelineSelection extends FacetPlugin {
         startY: 0,
         endX: 0,
         endY: 0,
-        offset: 0,
+        offset: 0
     };
 
     protected hostUpdated(changedProperties: Map<PropertyKey, unknown>): void {
@@ -176,7 +176,7 @@ export class FacetTimelineSelection extends FacetPlugin {
     protected computeSelectionRenderInfo(facet: FacetTimeline, barArea: HTMLElement | null): SelectionRenderInfo {
         const result: SelectionRenderInfo = {
             style: { display: 'none' },
-            userBoxStyle: { display: 'none' },
+            userBoxStyle: { display: 'none' }
         };
 
         if (facet && barArea) {
@@ -216,7 +216,7 @@ export class FacetTimelineSelection extends FacetPlugin {
                     top: `${top}px`,
                     bottom: `${bottom}px`,
                     left: `${left}px`,
-                    right: `${right}px`,
+                    right: `${right}px`
                 };
 
 
@@ -245,7 +245,7 @@ export class FacetTimelineSelection extends FacetPlugin {
                         left: `${displayLeft}%`,
                         right: `${displayRight}%`,
                         top: `${rect.top - timelineBB.top - 2}px`,
-                        bottom: `${timelineBB.bottom - rect.bottom - 1}px`,
+                        bottom: `${timelineBB.bottom - rect.bottom - 1}px`
                     };
                 }
             } else if (facet.selection) {
@@ -265,7 +265,7 @@ export class FacetTimelineSelection extends FacetPlugin {
                         left: `${displayLeft}%`,
                         right: `${displayRight}%`,
                         top: `${rect.top - timelineBB.top - 2}px`,
-                        bottom: `${timelineBB.bottom - rect.bottom - 1}px`,
+                        bottom: `${timelineBB.bottom - rect.bottom - 1}px`
                     };
 
                     if (selection[0] < view[0]) {
@@ -296,7 +296,7 @@ export class FacetTimelineSelection extends FacetPlugin {
             maxLabelStyle: { display: 'none' },
             filterWidth: 0,
             outerLeftWidth: 0,
-            outerRightWidth: 0,
+            outerRightWidth: 0
         };
 
         if (facet && barArea) {
@@ -308,7 +308,7 @@ export class FacetTimelineSelection extends FacetPlugin {
                 result.style = {
                     display: 'block',
                     left: '0',
-                    right: '0',
+                    right: '0'
                 };
                 result.displayBorder = 'no-border';
                 result.minHandleStyle = { display: 'none' };
@@ -358,7 +358,7 @@ export class FacetTimelineSelection extends FacetPlugin {
             filterInfo.style = {
                 display: 'block',
                 left: `${displayLeft}%`,
-                right: `${displayRight}%`,
+                right: `${displayRight}%`
             };
 
             filterInfo.outerLeftWidth = Math.max(0, barStep * leftIndex);
@@ -421,7 +421,7 @@ export class FacetTimelineSelection extends FacetPlugin {
                 filterInfo.style = {
                     display: 'block',
                     left: `${displayLeft}%`,
-                    right: `${displayRight}%`,
+                    right: `${displayRight}%`
                 };
 
                 filterInfo.outerLeftWidth = Math.max(0, barStep * (filterValues[0] - view[0]));
@@ -468,47 +468,47 @@ export class FacetTimelineSelection extends FacetPlugin {
                 filterInfo.minLabelStyle = {
                     display: 'block',
                     left: '4px',
-                    width: `${filterInfo.filterWidth * 0.5}px`,
+                    width: `${filterInfo.filterWidth * 0.5}px`
                 };
                 filterInfo.maxLabelStyle = {
                     display: 'block',
                     right: '4px',
-                    width: `${filterInfo.filterWidth * 0.5}px`,
+                    width: `${filterInfo.filterWidth * 0.5}px`
                 };
             } else if (filterInfo.outerLeftWidth < minDateWidth) {
                 filterInfo.minLabelStyle = {
                     display: 'block',
                     left: '4px',
                     width: `${Math.min(minDateWidth + dateLabelsPadding,
-                        Math.max(filterInfo.filterWidth - dateLabelsPadding, 0))}px`,
+                        Math.max(filterInfo.filterWidth - dateLabelsPadding, 0))}px`
                 };
                 filterInfo.maxLabelStyle = {
                     display: 'block',
                     right: '-10px',
-                    transform: 'translate(100%,0)',
+                    transform: 'translate(100%,0)'
                 };
             } else if (filterInfo.outerRightWidth < maxDateWidth) {
                 filterInfo.minLabelStyle = {
                     display: 'block',
                     left: '-10px',
-                    transform: 'translate(-100%,0)',
+                    transform: 'translate(-100%,0)'
                 };
                 filterInfo.maxLabelStyle = {
                     display: 'block',
                     right: '4px',
                     width: `${Math.min(maxDateWidth + dateLabelsPadding,
-                        Math.max(filterInfo.filterWidth - dateLabelsPadding, 0))}px`,
+                        Math.max(filterInfo.filterWidth - dateLabelsPadding, 0))}px`
                 };
             } else {
                 filterInfo.minLabelStyle = {
                     display: 'block',
                     left: '-10px',
-                    transform: 'translate(-100%,0)',
+                    transform: 'translate(-100%,0)'
                 };
                 filterInfo.maxLabelStyle = {
                     display: 'block',
                     right: '-10px',
-                    transform: 'translate(100%,0)',
+                    transform: 'translate(100%,0)'
                 };
             }
         }
@@ -625,8 +625,8 @@ export class FacetTimelineSelection extends FacetPlugin {
             bubbles: false,
             detail: {
                 type: 'min-filter-label-clicked',
-                el: event.currentTarget,
-            },
+                el: event.currentTarget
+            }
         }));
     }
 
@@ -635,8 +635,8 @@ export class FacetTimelineSelection extends FacetPlugin {
             bubbles: false,
             detail: {
                 type: 'max-filter-label-clicked',
-                el: event.currentTarget,
-            },
+                el: event.currentTarget
+            }
         }));
     }
 
@@ -780,6 +780,4 @@ export class FacetTimelineSelection extends FacetPlugin {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-timeline-selection')) {
     customElements.define('facet-timeline-selection', FacetTimelineSelection);
-} else {
-    console.debug('facet-timeline-selection element already defined, skipping registration');
 }

@@ -23,7 +23,7 @@
  */
 
 import {FacetElement} from '../facet-element/FacetElement';
-import {CSSResult, LitElement, html, css, unsafeCSS} from 'lit';
+import {CSSResult, html, css, unsafeCSS} from 'lit';
 import {render} from 'lit-html';
 import {type TemplateResult} from 'lit';
 import {isTemplateResult} from 'lit/directive-helpers.js';
@@ -115,6 +115,4 @@ export class FacetBlueprint extends FacetElement {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-blueprint')) {
     customElements.define('facet-blueprint', FacetBlueprint);
-} else {
-    console.debug('facet-blueprint element already defined, skipping registration');
 }

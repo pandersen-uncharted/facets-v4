@@ -68,7 +68,7 @@ const kBarStyleGenerators: {[key: string]: any} = {
     '-muted-contrast': (theme: string, index: number, value: string): string =>
         `${getBarColorHostSelector(theme, 'muted', index, true, false)} { background-color:${value} }`,
     '-muted-contrast-hover': (theme: string, index: number, value: string): string =>
-        `${getBarColorHostSelector(theme, 'muted', index, true, true)} { background-color:${value} }`,
+        `${getBarColorHostSelector(theme, 'muted', index, true, true)} { background-color:${value} }`
 };
 const kBarStyleSuffixes = Object.keys(kBarStyleGenerators);
 
@@ -173,12 +173,12 @@ export class FacetBarsValue extends FacetBlueprint {
                         }
                         return arr;
                     },
-                    toAttribute: (value: number): string => `[${value.toString()}]`,
-                },
+                    toAttribute: (value: number): string => `[${value.toString()}]`
+                }
             },
             actionButtons: { type: Number, attribute: 'action-buttons' },
             clipLeft: { type: Number },
-            clipRight: { type: Number },
+            clipRight: { type: Number }
         };
     }
 
@@ -202,7 +202,7 @@ export class FacetBarsValue extends FacetBlueprint {
         if (this.clipLeft > 0 || this.clipRight > 0) {
             const clipStyle = {
                 'margin-left': `${(this.clipLeft * 100).toFixed(2)}%`,
-                'margin-right': `${(this.clipRight * 100).toFixed(2)}%`,
+                'margin-right': `${(this.clipRight * 100).toFixed(2)}%`
             };
             return html`
             <div class="facet-bars-value-background" style="${styleMap(clipStyle)}">
@@ -272,6 +272,4 @@ export class FacetBarsValue extends FacetBlueprint {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-bars-value')) {
     customElements.define('facet-bars-value', FacetBarsValue);
-} else {
-    console.debug('facet-bars-value element already defined, skipping registration');
 }

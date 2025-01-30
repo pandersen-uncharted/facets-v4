@@ -14,12 +14,12 @@ export default defineConfig({
             entry: resolve(__dirname, 'src/main.ts'),
             name: 'facetsdocs',
             formats: ['iife'],
-            fileName: () => `iife/index.js`
+            fileName: () => 'iife/index.js'
         }
     },
     resolve: {
         alias: {
-            '@': resolve(__dirname, './src'),
+            '@': resolve(__dirname, './src')
         }
     }
 });

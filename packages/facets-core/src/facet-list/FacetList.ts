@@ -48,7 +48,7 @@ export class FacetList extends FacetContainer {
     public static get properties(): any {
         return {
             data: { type: Object },
-            selection: { type: Object },
+            selection: { type: Object }
         };
     }
 
@@ -275,7 +275,7 @@ export class FacetList extends FacetContainer {
 
         for (let i = 0, n = this.data.length; i < n; ++i) {
             const facet = this.data[i];
-            const id = facet.hasOwnProperty('id') ? facet.id : `${i}`;
+            const id = Object.prototype.hasOwnProperty.call(facet, 'id') ? facet.id : `${i}`;
             const selection = this._selection ? this._selection[id as string] || [] : null;
             this.facetIDs.add(id as string);
             if (this.templates.has(facet.type)) {
@@ -283,7 +283,7 @@ export class FacetList extends FacetContainer {
                 result.push(this.templates.get(facet.type).getHTML(facet.data, {
                     id,
                     '.selection': selection,
-                    '@facet-element-updated': this.handleElementUpdated,
+                    '@facet-element-updated': this.handleElementUpdated
                 }));
             } else {
                 const type = facet.type.split('#')[0];
@@ -303,6 +303,4 @@ export class FacetList extends FacetContainer {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-list')) {
     customElements.define('facet-list', FacetList);
-} else {
-    console.debug('facet-list element already defined, skipping registration');
 }

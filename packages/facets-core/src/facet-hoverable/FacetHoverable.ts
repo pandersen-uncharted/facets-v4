@@ -43,7 +43,7 @@ export class FacetHoverable extends FacetBlueprint {
 
     public static get properties(): any {
         return {
-            actionButtons: { type: Number, attribute: 'action-buttons' },
+            actionButtons: { type: Number, attribute: 'action-buttons' }
         };
     }
 
@@ -73,6 +73,4 @@ export class FacetHoverable extends FacetBlueprint {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-hoverable')) {
     customElements.define('facet-hoverable', FacetHoverable);
-} else {
-    console.debug('facet-hoverable element already defined, skipping registration');
 }

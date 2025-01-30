@@ -69,7 +69,7 @@ export class FacetTerms extends FacetContainer {
             subselection: { type: Object },
             multiselect: { type: Object },
             actionButtons: { type: Number, attribute: 'action-buttons' },
-            disabled: { type: Boolean },
+            disabled: { type: Boolean }
         };
     }
 
@@ -147,7 +147,7 @@ export class FacetTerms extends FacetContainer {
             if (value) {
                 const type = value.type || 'facet-terms-value';
                 const state = this.selection ? this.selection[key] && 'selected' || 'muted' : 'normal';
-                const subselection = this.subselection && this.subselection.hasOwnProperty(key) ? this.subselection[key] : null;
+                const subselection = this.subselection && Object.prototype.hasOwnProperty.call(this.subselection, key) ? this.subselection[key] : null;
                 const values = this.computeValuesArray(value, subselection);
                 const template = this.templates.get(type);
                 if (template) {
@@ -157,7 +157,7 @@ export class FacetTerms extends FacetContainer {
                         'state': state,
                         'contrast': contrast,
                         '.values': values,
-                        '@click': this.handleMouseClickEvent,
+                        '@click': this.handleMouseClickEvent
                     });
                 } else if (type === 'facet-terms-value') {
                     return html`
@@ -236,6 +236,4 @@ export class FacetTerms extends FacetContainer {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-terms')) {
     customElements.define('facet-terms', FacetTerms);
-} else {
-    console.debug('facet-terms element already defined, skipping registration');
 }

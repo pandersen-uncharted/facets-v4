@@ -42,7 +42,7 @@ enum WheelZoomState {
 export class ZoomControls extends FacetPlugin {
     public static get styles(): CSSResult[] {
         return [
-            css`${unsafeCSS(ZoomControlsStyle)}`,
+            css`${unsafeCSS(ZoomControlsStyle)}`
         ];
     }
 
@@ -93,8 +93,8 @@ export class ZoomControls extends FacetPlugin {
         this.dispatchEvent(new CustomEvent('zoom-controls-interaction', {
             bubbles: false,
             detail: {
-                type,
-            },
+                type
+            }
         }));
     }
 

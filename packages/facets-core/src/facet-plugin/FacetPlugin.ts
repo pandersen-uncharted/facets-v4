@@ -61,8 +61,8 @@ export class FacetPlugin extends LitElement {
                 parent.dispatchEvent(new CustomEvent(FacetPlugin.connectedEvent, {
                     bubbles: true,
                     detail: {
-                        plugin: this,
-                    },
+                        plugin: this
+                    }
                 }));
             };
             if ((window as any).ShadyDOM && (window as any).ShadyDOM.inUse) {
@@ -79,8 +79,8 @@ export class FacetPlugin extends LitElement {
             this.host.dispatchEvent(new CustomEvent(FacetPlugin.disconnectedEvent, {
                 bubbles: true,
                 detail: {
-                    plugin: this,
-                },
+                    plugin: this
+                }
             }));
         }
     }
@@ -103,6 +103,4 @@ export class FacetPlugin extends LitElement {
 // Register the custom element if it hasn't been registered yet
 if (!customElements.get('facet-plugin')) {
     customElements.define('facet-plugin', FacetPlugin);
-} else {
-    console.debug('facet-plugin element already defined, skipping registration');
 }

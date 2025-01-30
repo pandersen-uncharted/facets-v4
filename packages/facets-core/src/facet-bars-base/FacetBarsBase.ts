@@ -93,7 +93,7 @@ export class FacetBarsBase extends FacetContainer {
             filter: { type: Array, hasChanged: kFilterValueHasChanged },
             selection: { type: Array, hasChanged: kRangeValueHasChanged },
             subselection: { type: Array },
-            actionButtons: { type: Number, attribute: 'action-buttons' },
+            actionButtons: { type: Number, attribute: 'action-buttons' }
         };
     }
 
@@ -269,7 +269,7 @@ export class FacetBarsBase extends FacetContainer {
         const htmlTemplate = this.getValuesHTML(
             this._getViewValues(values, view),
             actionButtons,
-            view[0],
+            view[0]
         );
 
         this._activeView = view;
@@ -281,8 +281,8 @@ export class FacetBarsBase extends FacetContainer {
     protected getValuesHTML(
         values: (FacetBarsValueData|null)[],
         actionButtons: string,
-        offset: number,
-    ): ReturnType<typeof repeat>  {
+        offset: number
+    ): ReturnType<typeof repeat> {
         const theme = this.barValueTheme;
         const contrast = this.hover;
         let id = 0;
@@ -307,7 +307,7 @@ export class FacetBarsBase extends FacetContainer {
                     'contrast': contrast,
                     '.values': valuesArray,
                     '.clipLeft': clipLeft,
-                    '.clipRight': clipRight,
+                    '.clipRight': clipRight
                 });
             } else if (type === 'facet-bars-value') {
                 return html`
