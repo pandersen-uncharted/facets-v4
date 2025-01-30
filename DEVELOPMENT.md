@@ -6,11 +6,10 @@
 
 # Development Notes for Uncharted's Facets
 ---  
-The Facets library is split in five packages:
+The Facets library is split in three packages:
 1. `facets-core` contains all the components necessary to start using facets in your project
 2. `facets-plugins` is a collection of components that extend facets' behavior, look and feel
 3. `facets-docs` documentation and examples live here
-4. `facets-builder` tool to create and customize facets (under construction, Facets 4+ feature)
 
 The only packages published to the registry are `facets-core` and `facets-plugins` 
 
@@ -31,7 +30,7 @@ $ npm install @uncharted.software/facets-plugins
 
 ## Usage
 
-The documentation is not hosted anywhere at the moment but can be accessed by building the project and running the
+Examples are hosted at https://unchartedsoftware.github.io/facets/basic.html but can also be built locally by building the project and running the
 `facets-docs` package.
 
 
@@ -78,7 +77,11 @@ On your browser navigate to http://localhost:5173/
 Changes to the docs code will appear automatically but if you make changes to `facets-core` or `facets-plugins` you will need to rerun `yarn build` for
 whichever you've changed, and then `yarn build` and `yarn start` for `facets-docs`. (Note: In theory you could do `yarn start` in `facets-core` and `facets-plugins`
 and have everything update automatically but I've not had success with that.)
-  
+
+## Building Into Your Application
+
+**NOTE: This has not been verified to work.**
+
 To develop in your own app, link ALL the published facets packages to your app, from the root of the Facets repo run: 
 ```shell script
 $ cd ../facets-core
@@ -94,10 +97,9 @@ $ yarn link @uncharted.software/facets-core @uncharted.software/facets-plugins
 
 Start (or re-start) your project and continue with development.
 
-
----
-
 ## Publish
+**NOTE: This has not been verified to work.**
+
 - Bump the packages using yarn bump or npm run bump
 ```shell script
 $ yarn bump
