@@ -7,14 +7,19 @@
 # Using Facets in Javascript/Typescript
 ---
 
-## `package.json`
-Pretty straight forward, just add the following:
-```json
-"dependencies": {
-    "@uncharted.software/facets-core": "4.0.0",
-    "@uncharted.software/facets-plugins": "4.0.0",
-}
+## Install
+
+Use `yarn` to install the desired packages:
+```shell script
+yarn add @uncharted.software/facets-core
+yarn add @uncharted.software/facets-plugins
 ```
+or `npm`:
+```shell script
+npm install @uncharted.software/facets-core
+npm install @uncharted.software/facets-plugins
+```
+
 ## Instantiating Facets
 First, import the libraries as usual.
 ```javascript
@@ -36,6 +41,7 @@ termsFacet.data = {
     ]
 };
 ```
+
 ## Facet Messages
 Facets support a single message type, `facet-element-updated`. This message is dispatched whenever any of the properties of a facet changes. Subscribe to the message by adding a listener to the facet.
 ```javascript

@@ -4,7 +4,7 @@
 
 </div>
 
-# Development Notes for Uncharted's Facets
+# Development
 ---  
 The Facets library is split in three packages:
 1. `facets-core` contains all the components necessary to start using facets in your project
@@ -14,68 +14,40 @@ The Facets library is split in three packages:
 The only packages published to the registry are `facets-core` and `facets-plugins` 
 
 
-## Installation
+## Building
 
-If not already enabled, enable corepac, then allow it to install yarn:
+Check out or download this repo, then, from the repo's root folder run the following commands:
+
+If not already enabled, enable corepack, then allow it to install yarn:
 ```shell script
 corepack enable
 corepack install
 ```
 
-Use `yarn` to install the desired packages:
 ```shell script
-$ yarn add @uncharted.software/facets-core
-$ yarn add @uncharted.software/facets-plugins
-```
-or `npm`:
-```shell script
-$ npm install @uncharted.software/facets-core
-$ npm install @uncharted.software/facets-plugins
+yarn install
+yarn build
 ```
 
-
-## Usage
-
-Examples are hosted at https://unchartedsoftware.github.io/facets/basic.html but can also be built locally by building the project and running the
-`facets-docs` package.
-
-
-Check out or download this repo, then, from the repo's root folder run the following commands:
-```shell script
-$ yarn install
-$ yarn build
-```
-
-You can now run the documentation:
-```shell script
-$ cd packages/facets-docs
-$ yarn start
-```
-
-On your browser navigate to http://localhost:5173/
-
-
-## Development
-
-Check out or download this repo.
+Or build the packages individually from their respective directories:
 
 Build `facets-core`.
 ```shell script
 $ cd packages/facets-core
-$ yarn build
+yarn build
 ```
 
 Build `facets-plugins`. (Optional)
 ```shell script
-$ cd packages/facets-plugins
-$ yarn build
+cd packages/facets-plugins
+yarn build
 ```
 
-To develop locally, run the `facets-docs` package and use it as a testbed:
+Run the `facets-docs` package and use it as a testbed:
 ```shell script
-$ cd packages/facets-docs
-$ yarn build
-$ yarn start
+cd packages/facets-docs
+yarn build
+yarn start
 ```
 
 On your browser navigate to http://localhost:5173/  
@@ -84,47 +56,28 @@ Changes to the docs code will appear automatically but if you make changes to `f
 whichever you've changed, and then `yarn build` and `yarn start` for `facets-docs`. (Note: In theory you could do `yarn start` in `facets-core` and `facets-plugins`
 and have everything update automatically but I've not had success with that.)
 
-## Building Into Your Application
-
-**NOTE: This has not been verified to work.**
-
-To develop in your own app, link ALL the published facets packages to your app, from the root of the Facets repo run: 
-```shell script
-$ cd ../facets-core
-$ yarn link
-$ cd ../facets-plugins
-$ yarn link
-```
-
-Then, from the root of your project run:
-```shell script
-$ yarn link @uncharted.software/facets-core @uncharted.software/facets-plugins
-```
-
-Start (or re-start) your project and continue with development.
 
 ## Publish
 **NOTE: This has not been verified to work.**
 
 - Bump the packages using yarn bump or npm run bump
 ```shell script
-$ yarn bump
+yarn bump
 ```
 - One <strong>must</strong> have an npm account that belongs to the uncharted organization and be logged into the npm scope
 - Run npm whoami to confirm npm is logged in (if not follow the prompts)
 ```shell script
-$ npm whoami
+npm whoami
 ```
 - Log into the uncharted npm scope
 ```shell script
-$ npm login --registry https://npm.uncharted.software --scope @uncharted
+npm login --registry https://npm.uncharted.software --scope @uncharted
 ```
-- Individually publish the following packages: css-tools, facets-core, and facets-plugins
+- Individually publish facets-core and facets-plugins
  ```shell script
-$ cd css-tools
-$ yarn publish
-$ cd ../facets-core
-$ yarn publish
-$ cd ../facets-plugins
-$ yarn publish
+
+cd ../facets-core
+yarn publish
+cd ../facets-plugins
+yarn publish
 ```
