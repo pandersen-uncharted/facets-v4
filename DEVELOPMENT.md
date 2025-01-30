@@ -60,7 +60,7 @@ and have everything update automatically but I've not had success with that.)
 ## Publish
 **NOTE: This has not been verified to work.**
 
-- Bump the packages using yarn bump or npm run bump
+- Bump the package versions
 ```shell script
 yarn bump
 ```
