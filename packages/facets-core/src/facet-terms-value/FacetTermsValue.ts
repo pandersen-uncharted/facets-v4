@@ -216,7 +216,7 @@ export class FacetTermsValue extends FacetHoverable {
                         styles.push(kBarStyleGenerators[kBarStyleSuffixes[ii]](hostTheme, i, optionValue));
                     }
                 }
-            } while (++i < n || hasOption);
+            } while (++i < n && !hasOption);
 
             const tickValue = getComputedStyle(this).getPropertyValue('--facet-terms-tick-color').trim();
             if (tickValue !== undefined) {

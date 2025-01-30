@@ -138,7 +138,7 @@
 }
 
 :host([contrast=true][state="muted"]) .facet-terms-value-bar-0 {
-    background-color: var(--facet-terms-bar-0-muted-contrast-hover, #D9DADB);
+    background-color: var(--facet-terms-bar-0-muted-contrast, #D9DADB);
 }
 
 :host([contrast=true][state="muted"]:hover) .facet-terms-value-bar-0 {
