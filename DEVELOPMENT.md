@@ -16,6 +16,12 @@ The only packages published to the registry are `facets-core` and `facets-plugin
 
 ## Installation
 
+If not already enabled, enable corepac, then allow it to install yarn:
+```shell script
+corepack enable
+corepack install
+```
+
 Use `yarn` to install the desired packages:
 ```shell script
 $ yarn add @uncharted.software/facets-core
