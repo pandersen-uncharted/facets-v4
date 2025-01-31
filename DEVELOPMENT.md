@@ -66,12 +66,6 @@ From the root of the repo:
 yarn bump patch
 ```
 
-- One <strong>must</strong> have an npm account that belongs to the uncharted organization and be logged into the npm scope
-- To verify:
-```shell script
-yarn npm whoami
-```
-
 - Log into the uncharted npm registry for publishing (see `.yarnrc.yml` > `npmPublishRegistry`)
 ```shell script
 yarn npm login --publish
@@ -79,6 +73,6 @@ yarn npm login --publish
 
 - Individually publish facets-core and facets-plugins
  ```shell script
-yarn workspace @uncharted.software/facets-core npm publish
-yarn workspace @uncharted.software/facets-plugins npm publish
+yarn workspace @uncharted.software/facets-core npm publish --access=public
+yarn workspace @uncharted.software/facets-plugins npm publish --access-public
 ```
