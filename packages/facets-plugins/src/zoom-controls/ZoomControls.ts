@@ -22,7 +22,8 @@
  *
  */
 
-import {css, CSSResult, customElement, unsafeCSS, TemplateResult, html} from 'lit-element';
+import {css, CSSResult, unsafeCSS, TemplateResult, html} from 'lit';
+import { customElement } from 'lit/decorators.js';
 import {FacetPlugin, FacetBarsBase, makeIconSVG} from '@uncharted.software/facets-core';
 import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus';
 import {faMinus} from '@fortawesome/free-solid-svg-icons/faMinus';
@@ -41,7 +42,7 @@ enum WheelZoomState {
 export class ZoomControls extends FacetPlugin {
     public static get styles(): CSSResult[] {
         return [
-            css`${unsafeCSS(ZoomControlsStyle)}`,
+            css`${unsafeCSS(ZoomControlsStyle)}`
         ];
     }
 
@@ -92,8 +93,8 @@ export class ZoomControls extends FacetPlugin {
         this.dispatchEvent(new CustomEvent('zoom-controls-interaction', {
             bubbles: false,
             detail: {
-                type,
-            },
+                type
+            }
         }));
     }
 

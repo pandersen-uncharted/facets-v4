@@ -42,7 +42,7 @@
 }
 
 :host(:hover) .facet-blueprint {
-    background-color: #F7F7F7;
+    background-color: var(--facet-blueprint-hover-background, #F7F7F7);
 }
 
 :host([state="selected"]) .facet-blueprint {
@@ -63,39 +63,39 @@
 }
 
 :host([state="normal"]) .facet-term-bar-background {
-    background-color: #EAEBEC;
+    background-color: var(--facet-term-bar-background-normal, #EAEBEC);
 }
 
 :host([contrast=true][state="normal"]) .facet-term-bar-background {
-    background-color: #F7F7F7;
+    background-color: var(--facet-term-bar-background-contrast-normal, #F7F7F7);
 }
 
 :host([contrast=true][state="normal"]:hover) .facet-term-bar-background {
-    background-color: #EAEBEC;
+    background-color: var(--facet-term-bar-background-contrast-normal-hover, #EAEBEC);
 }
 
 :host([state="selected"]) .facet-term-bar-background {
-    background-color: #D9DADB;
+    background-color: var(--facet-term-bar-background-selected, #D9DADB);
 }
 
 :host([contrast=true][state="selected"]) .facet-term-bar-background {
-    background-color: #EAEBEC;
+    background-color: var(--facet-term-bar-background-contrast-selected, #EAEBEC);
 }
 
 :host([contrast=true][state="selected"]:hover) .facet-term-bar-background {
-    background-color: #D9DADB;
+    background-color: var(--facet-term-bar-background-contrast-selected-hover, #D9DADB);
 }
 
 :host([state="muted"]) .facet-term-bar-background {
-    background-color: #EAEBEC;
+    background-color: var(--facet-term-bar-background-muted, #EAEBEC);
 }
 
 :host([contrast=true][state="muted"]) .facet-term-bar-background {
-    background-color: #F7F7F7;
+    background-color: var(--facet-term-bar-background-contrast-muted, #F7F7F7);
 }
 
 :host([contrast=true][state="muted"]:hover) .facet-term-bar-background {
-    background-color: #EAEBEC;
+    background-color: var(--facet-term-bar-background-contrast-muted-hover, #EAEBEC);
 }
 
 .facet-term-bar-background > div {
@@ -138,7 +138,7 @@
 }
 
 :host([contrast=true][state="muted"]) .facet-terms-value-bar-0 {
-    background-color: var(--facet-terms-bar-0-muted-contrast-hover, #D9DADB);
+    background-color: var(--facet-terms-bar-0-muted-contrast, #D9DADB);
 }
 
 :host([contrast=true][state="muted"]:hover) .facet-terms-value-bar-0 {
@@ -197,30 +197,30 @@
 }
 
 .facet-term-label {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.02em;
-    color: #1A1B1C;
+    color: var(--facet-term-label, #1A1B1C);
 }
 
 .facet-term-annotation {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.02em;
-    color: #727375;
+    color: var(--face-term-annotation, #727375);
 
     flex-grow: 1;
     padding-left: 14px;
 }
 
 .facet-term-value {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--facet-font-family, "IBM Plex Sans"), sans-serif;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.02em;
-    color: #1A1B1C;
+    color: var(--facet-term-value, #1A1B1C);
     margin-left: 14px;
 }
 

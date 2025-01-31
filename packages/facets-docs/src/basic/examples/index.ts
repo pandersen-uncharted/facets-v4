@@ -23,100 +23,100 @@
  */
 
 // @ts-ignore
-import blueprintHTML from './facet-blueprint/example.html';
+import blueprintHTML from './facet-blueprint/example.html?raw';
 // @ts-ignore
-import blueprintCSS from './facet-blueprint/style.css';
+import blueprintCSS from './facet-blueprint/style.css?raw';
 // @ts-ignore
-import blueprintJS from './facet-blueprint/source.example';
+import blueprintJS from './facet-blueprint/source.example?raw';
 
 // @ts-ignore
-import termHTML from './facet-terms/example.html';
+import termHTML from './facet-terms/example.html?raw';
 // @ts-ignore
-import termCSS from './facet-terms/style.css';
+import termCSS from './facet-terms/style.css?raw';
 // @ts-ignore
-import termJS from './facet-terms/source.example';
+import termJS from './facet-terms/source.example?raw';
 
 // @ts-ignore
-import barsHTML from './facet-bars/example.html';
+import barsHTML from './facet-bars/example.html?raw';
 // @ts-ignore
-import barsCSS from './facet-bars/style.css';
+import barsCSS from './facet-bars/style.css?raw';
 // @ts-ignore
-import barsJS from './facet-bars/source.example';
+import barsJS from './facet-bars/source.example?raw';
 
 // @ts-ignore
-import timelineHTML from './facet-timeline/example.html';
+import timelineHTML from './facet-timeline/example.html?raw';
 // @ts-ignore
-import timelineCSS from './facet-timeline/style.css';
+import timelineCSS from './facet-timeline/style.css?raw';
 // @ts-ignore
-import timelineJS from './facet-timeline/source.example';
+import timelineJS from './facet-timeline/source.example?raw';
 
 // @ts-ignore
-import listHTML from './facet-list/example.html';
+import listHTML from './facet-list/example.html?raw';
 // @ts-ignore
-import listCSS from './facet-list/style.css';
+import listCSS from './facet-list/style.css?raw';
 // @ts-ignore
-import listJS from './facet-list/source.example';
+import listJS from './facet-list/source.example?raw';
 
 // @ts-ignore
-import templateHTML from './facet-template/example.html';
+import templateHTML from './facet-template/example.html?raw';
 // @ts-ignore
-import templateCSS from './facet-template/style.css';
+import templateCSS from './facet-template/style.css?raw';
 // @ts-ignore
-import templateJS from './facet-template/source.example';
+import templateJS from './facet-template/source.example?raw';
 
 // @ts-ignore
-import pluginHTML from './facet-plugin/example.html';
+import pluginHTML from './facet-plugin/example.html?raw';
 // @ts-ignore
-import pluginCSS from './facet-plugin/style.css';
+import pluginCSS from './facet-plugin/style.css?raw';
 // @ts-ignore
-import pluginJS from './facet-plugin/source.example';
+import pluginJS from './facet-plugin/source.example?raw';
 
 // @ts-ignore
-import buildHTML from './build-a-facet/example.html';
+import buildHTML from './build-a-facet/example.html?raw';
 // @ts-ignore
-import buildCSS from './build-a-facet/style.css';
+import buildCSS from './build-a-facet/style.css?raw';
 // @ts-ignore
-import buildJS from './build-a-facet/source.example';
+import buildJS from './build-a-facet/source.example?raw';
 
-export const examples = {
+export const examples: Record<string, any> = {
     'facet-blueprint': {
         html: blueprintHTML,
         css: blueprintCSS,
-        js: blueprintJS,
+        js: blueprintJS
     },
     'facet-terms': {
         html: termHTML,
         css: termCSS,
-        js: termJS,
+        js: termJS
     },
     'facet-bars': {
         html: barsHTML,
         css: barsCSS,
-        js: barsJS,
+        js: barsJS
     },
     'facet-timeline': {
         html: timelineHTML,
         css: timelineCSS,
-        js: timelineJS,
+        js: timelineJS
     },
     'facet-list': {
         html: listHTML,
         css: listCSS,
-        js: listJS,
+        js: listJS
     },
     'facet-template': {
         html: templateHTML,
         css: templateCSS,
-        js: templateJS,
+        js: templateJS
     },
     'facet-plugin': {
         html: pluginHTML,
         css: pluginCSS,
-        js: pluginJS,
+        js: pluginJS
     },
     'build-a-facet': {
         html: buildHTML,
         css: buildCSS,
-        js: buildJS,
-    },
+        js: buildJS
+    }
 };

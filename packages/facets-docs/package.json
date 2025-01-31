@@ -1,23 +1,12 @@
 {
     "name": "@uncharted.software/facets-docs",
-    "version": "3.2.6",
+    "version": "4.0.1",
     "license": "MIT",
-    "entry": "src/index.ts",
-    "main": "dist/es5/index.js",
-    "module": "dist/es6/index.js",
-    "iife": "dist/iife/index.js",
-    "jsnext:main": "dist/next/index.js",
-    "types": "dist/types/index.d.ts",
-    "files": [
-        "dist"
-    ],
+    "type": "module",
+    "main": "",
     "scripts": {
-        "build": "npm-run-all --parallel build:**",
-        "build:iife": "cross-env TARGET='iife' rollup --config",
-        "build:es5": "cross-env TARGET='es5' rollup --config",
-        "build:es6": "cross-env TARGET='es6' rollup --config",
-        "build:next": "cross-env TARGET='next' rollup --config",
-        "build:types": "tsc --declaration --declarationMap --emitDeclarationOnly --skipLibCheck --outDir ./dist/types",
+        "build": "vite build",
+        "preview": "vite preview",
         "clean": "run-p clean:*",
         "clean:code": "rm -rf ./dist",
         "clean:pages": "rm -rf ./pages",
@@ -25,21 +14,29 @@
         "pages:build": "yarn build",
         "pages:copy": "run-p pages:copy:*",
         "pages:copy:code": "copyfiles dist/iife/* pages",
-        "pages:copy:www": "copyfiles -u 1 www/**/* www/* pages",
-        "start": "cross-env TARGET='debug' rollup --config --watch",
-        "watch": "cross-env TARGET='all' rollup --config --watch",
-        "lint": "eslint . --ext .js,.ts,.jsx,.tsx --ignore-path ../../.eslintignore",
-        "prepack": "npm-run-all clean build"
+        "pages:copy:www": "copyfiles -u 1 public/**/* public/* pages",
+        "start": "vite",
+        "lint": "eslint .",
+        "lint:fix": "yarn lint --fix",
+        "prepack": "npm-run-all clean build",
+        "bump-to": "yarn version"
     },
     "dependencies": {
-        "@uncharted.software/facets-core": "^3.2.6",
-        "@uncharted.software/facets-plugins": "^3.2.6",
-        "codemirror": "^5.49.0",
-        "lit-element": "^2.2.1",
-        "lit-html": "^1.1.2",
-        "nick-generator": "^1.0.1"
+        "@codemirror/lang-css": "6.3.1",
+        "@codemirror/lang-html": "6.4.9",
+        "@codemirror/lang-javascript": "6.2.2",
+        "@uncharted.software/facets-core": "workspace:^4.0.1",
+        "@uncharted.software/facets-plugins": "workspace:^4.0.1",
+        "codemirror": "6.0.1",
+        "lit": "3.2.1",
+        "nick-generator": "1.0.1"
     },
     "devDependencies": {
-        "copyfiles": "^2.4.1"
+        "@eslint/js": "9.19.0",
+        "copyfiles": "2.4.1",
+        "eslint": "9.19.0",
+        "typescript": "5.7.3",
+        "typescript-eslint": "8.22.0",
+        "vite": "6.0.9"
     }
 }

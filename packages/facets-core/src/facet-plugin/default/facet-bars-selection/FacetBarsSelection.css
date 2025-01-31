@@ -24,7 +24,7 @@
 
 .facet-bars-selection-user {
     position: absolute;
-    border: 1px dashed black;
+    border: 1px dashed var(--facet-bars-selection-user-border, black);
     pointer-events: none;
     user-select: none;
     -ms-user-select: none;
@@ -32,8 +32,8 @@
 
 .facet-bars-selection-computed {
     position: absolute;
-    background-color: rgba(37,93,204, 0.15);
-    border: 1px solid #255DCC;
+    background-color: var(--facet-bars-selection-computed-background, rgba(37,93,204, 0.15));
+    border: 1px solid var(--facet-bars-selection-computed-border, #255DCC);
     pointer-events: none;
     user-select: none;
     -ms-user-select: none;
@@ -68,12 +68,12 @@
     top: 2px;
     bottom: 2px;
     width: 1px;
-    background-color: #EBF1FC;
+    background-color: var(--facet-bars-selection-handle-background, #EBF1FC);
 }
 
 .facet-bars-selection-handle-left {
     left: -7px;
-    border-right: 5px solid #255DCC;
+    border-right: 5px solid var(--facet-bars-selection-handle-border, #255DCC);
 }
 
 .facet-bars-selection-handle-left:after {
@@ -86,7 +86,7 @@
 
 .facet-bars-selection-handle-right {
     right: -7px;
-    border-left: 5px solid #255DCC;
+    border-left: 5px solid var(--facet-bars-selection-handle-border, #255DCC);
 }
 
 .facet-bars-selection-handle-right:after {
@@ -103,7 +103,7 @@
     top: -1px;
     width: 9px;
     height: 9px;
-    background-color: #255DCC;
+    background-color: var(--facet-bars-selection-clear-button-background, #255DCC);
     border-radius: 2px;
     cursor: pointer;
     pointer-events: all;
@@ -116,7 +116,7 @@
     top: 1px;
     height: 7px;
     width: 1px;
-    background-color: white;
+    background-color: var(--facet-bars-selection-clear-button-foreground, white);
     transform: rotate(45deg);
 }
 
@@ -127,6 +127,6 @@
     top: 1px;
     height: 7px;
     width: 1px;
-    background-color: white;
+    background-color: var(--facet-bars-selection-clear-button-foreground, white);
     transform: rotate(-45deg);
 }

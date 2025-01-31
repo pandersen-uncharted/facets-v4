@@ -22,9 +22,15 @@
  *
  */
 
-import {customElement, LitElement, TemplateResult, html} from 'lit-element';
-import {directive} from 'lit-html';
+import {LitElement, TemplateResult, html} from 'lit';
+import {directive, Directive} from 'lit/directive.js';
 import {MutationWrapper} from '../tools/MutationWrapper';
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'facet-template': FacetTemplate;
+    }
+}
 
 const kSlotsKey = Symbol('FacetTemplate::Slots');
 const kDataKey = Symbol('FacetTemplate::Data');
@@ -34,7 +40,16 @@ export interface TemplateComponents {
     values: (string | symbol)[];
 }
 
-@customElement('facet-template')
+class XLinkDirective extends Directive {
+    render(value: string) {
+        return (part: any): void => {
+            if (part.element) {
+                part.element.setAttributeNS('http://www.w3.org/1999/xlink', part.name, value);
+            }
+        };
+    }
+}
+
 export class FacetTemplate extends LitElement {
     public static connectedEvent = 'facet-template-connected';
     public static disconnectedEvent = 'facet-template-disconnected';
@@ -42,7 +57,7 @@ export class FacetTemplate extends LitElement {
     public static get properties(): any {
         return {
             target: {type: String},
-            escapeRegex: {type: String, attribute: 'escape-regex'},
+            escapeRegex: {type: String, attribute: 'escape-regex'}
         };
     }
     public target: string = '';
@@ -71,7 +86,7 @@ export class FacetTemplate extends LitElement {
     private customAttributesKeys: Map<symbol, string>;
     private tagComponents: TemplateComponents;
     private mutationObserver: MutationWrapper;
-    private xlinkDirective: (...args: any[]) => any;
+    private xlinkDirective = directive(XLinkDirective);
 
     public constructor() {
         super();
@@ -82,17 +97,13 @@ export class FacetTemplate extends LitElement {
         this.customAttributesKeys = new Map<symbol, string>();
         this.tagComponents = {
             strings: [],
-            values: [],
+            values: []
         };
-        this.mutationObserver = new MutationWrapper(this, false);
+        this.mutationObserver = new MutationWrapper(this as unknown as Element, false);
         this.mutationObserver.nodesAdded = this._processAddedNodes.bind(this);
-
-        this.xlinkDirective = directive((value: string) => (part: any): void => {
-            part.committer.element.setAttributeNS('http://www.w3.org/1999/xlink', part.committer.name, value);
-        });
     }
 
-    public getHTML(data: any, customAttributes: {[key: string]: any} = {}): TemplateResult {
+    public generateTemplate(data: any, customAttributes: {[key: string]: any} = {}): TemplateResult {
         return this._getHTML(data, this.tagComponents, customAttributes);
     }
 
@@ -103,7 +114,7 @@ export class FacetTemplate extends LitElement {
             this.customAttributesKeys.set(key, name);
             this.tagComponents = {
                 strings: [],
-                values: [],
+                values: []
             };
             this._initializeTemplateTag();
         }
@@ -115,7 +126,7 @@ export class FacetTemplate extends LitElement {
             this.customAttributesNames.delete(name);
             this.tagComponents = {
                 strings: [],
-                values: [],
+                values: []
             };
             this._initializeTemplateTag();
         }
@@ -136,8 +147,8 @@ export class FacetTemplate extends LitElement {
                 parent.dispatchEvent(new CustomEvent(FacetTemplate.connectedEvent, {
                     bubbles: true,
                     detail: {
-                        template: this,
-                    },
+                        template: this
+                    }
                 }));
             };
             if ((window as any).ShadyDOM && (window as any).ShadyDOM.inUse) {
@@ -158,13 +169,13 @@ export class FacetTemplate extends LitElement {
             this.host.dispatchEvent(new CustomEvent(FacetTemplate.disconnectedEvent, {
                 bubbles: true,
                 detail: {
-                    plugin: this,
-                },
+                    plugin: this
+                }
             }));
         }
     }
 
-    protected createRenderRoot(): Element | ShadowRoot {
+    protected override createRenderRoot(): HTMLElement {
         return this;
     }
 
@@ -181,15 +192,15 @@ export class FacetTemplate extends LitElement {
             const result: string[] = [];
             this.templateAttributes.forEach(
                 (value, key): number => result.push(
-                    `${key.replace(/template-(.*?)/gm, '')}="${value}"`,
-                ),
+                    `${key.replace(/template-(.*?)/gm, '')}="${value}"`
+                )
             );
             return result.join(' ');
         })()}` : ''}`;
 
         this.tagComponents = {
             strings: [],
-            values: [],
+            values: []
         };
 
         this._processHtmlParts(tagHTML, this.tagComponents);
@@ -224,15 +235,15 @@ export class FacetTemplate extends LitElement {
                 const child = nodes[i] as HTMLElement;
                 const slotComponents: TemplateComponents = {
                     strings: [],
-                    values: [],
+                    values: []
                 };
 
                 const slotHTML = child.outerHTML.replace(
                     /\stemplate-(.*?\s?)=/gm,
-                    (match: string, inner: string): string => ` ${inner}=`,
+                    (match: string, inner: string): string => ` ${inner}=`
                 ).replace(
                     /(<\/?)template-(.*?)>/gm,
-                    (match: string, open: string, inner: string): string => `${open}${inner}>`,
+                    (match: string, open: string, inner: string): string => `${open}${inner}>`
                 );
 
                 if (child.tagName.toLowerCase() === 'facet-template') {
@@ -295,7 +306,7 @@ export class FacetTemplate extends LitElement {
                     values.push(this._getXlinkValue(this.xlinkAttributes.get(key) as TemplateComponents, data));
                 } else if (
                     this.customAttributesKeys.has(key) &&
-                    customAttributes.hasOwnProperty(this.customAttributesKeys.get(key) as string)
+                    Object.prototype.hasOwnProperty.call(customAttributes, this.customAttributesKeys.get(key) as string)
                 ) {
                     values.push(customAttributes[this.customAttributesKeys.get(key) as string]);
                 } else {
@@ -334,10 +345,8 @@ export class FacetTemplate extends LitElement {
         if (funcCall.length === 2 && typeof result === 'function') {
             // it's important to pass `null` as `this` to avoid leaking data when possible so disable es-lint
             if (funcCall[1]) {
-                // eslint-disable-next-line no-useless-call
                 result = result.call(null, this._readValueFromRoute(funcCall[1], data));
             } else {
-                // eslint-disable-next-line no-useless-call
                 result = result.call(null);
             }
         }
@@ -352,4 +361,9 @@ export class FacetTemplate extends LitElement {
         }
         return value;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-template')) {
+    customElements.define('facet-template', FacetTemplate);
 }

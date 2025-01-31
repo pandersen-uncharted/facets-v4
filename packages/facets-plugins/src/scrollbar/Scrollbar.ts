@@ -22,9 +22,10 @@
  *
  */
 
-import {css, CSSResult, customElement, html, TemplateResult, unsafeCSS} from 'lit-element';
-import { styleMap } from 'lit-html/directives/style-map';
-import { classMap } from 'lit-html/directives/class-map';
+import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
+import { classMap } from 'lit/directives/class-map.js';
 import {FacetPlugin, FacetBarsBase} from '@uncharted.software/facets-core';
 
 // @ts-ignore
@@ -40,7 +41,7 @@ enum WheelScrollState {
 export class Scrollbar extends FacetPlugin {
     public static get styles(): CSSResult[] {
         return [
-            css`${unsafeCSS(ScrollbarStyle)}`,
+            css`${unsafeCSS(ScrollbarStyle)}`
         ];
     }
 
@@ -48,7 +49,7 @@ export class Scrollbar extends FacetPlugin {
         return {
             minBarWidth: { type: Number, attribute: 'min-bar-width' },
             autoHide: { type: Object, attribute: 'auto-hide' },
-            roundCaps: { type: Object, attribute: 'round-caps' },
+            roundCaps: { type: Object, attribute: 'round-caps' }
         };
     }
 
@@ -123,12 +124,12 @@ export class Scrollbar extends FacetPlugin {
                 const thumbStyle = {
                     left: `${thumbLeft}%`,
                     right: `${thumbRight}%`,
-                    visibility: thumbVisibility,
+                    visibility: thumbVisibility
                 };
 
                 const backgroundClasses = {
                     'scrollbar-background': true,
-                    'scrollbar-background-round': this.roundCaps,
+                    'scrollbar-background-round': this.roundCaps
                 };
 
                 return html`
@@ -329,7 +330,7 @@ export class Scrollbar extends FacetPlugin {
                 0,
                 milliStep,
                 time,
-                time - startTime,
+                time - startTime
             ));
         }
     }
@@ -356,7 +357,7 @@ export class Scrollbar extends FacetPlugin {
                     newCurrent,
                     milliStep,
                     newTime,
-                    newTime - time,
+                    newTime - time
                 );
             });
         } else {

@@ -22,14 +22,13 @@
  *
  */
 
-import {css, CSSResult, customElement, unsafeCSS, TemplateResult, html} from 'lit-element';
+import {css, CSSResult, unsafeCSS, TemplateResult, html} from 'lit';
 import {FacetPlugin} from '../../FacetPlugin';
 import {FacetBarsBase} from '../../../facet-bars-base/FacetBarsBase';
 
 // @ts-ignore
 import FacetTimelineLabelsStyle from './FacetTimelineLabels.css';
 
-@customElement('facet-timeline-labels')
 export class FacetTimelineLabels extends FacetPlugin {
     private resizeObserver: ResizeObserver = new ResizeObserver(entries => {
         entries.forEach(e => {
@@ -40,7 +39,7 @@ export class FacetTimelineLabels extends FacetPlugin {
 
     public static get styles(): CSSResult[] {
         return [
-            css`${unsafeCSS(FacetTimelineLabelsStyle)}`,
+            css`${unsafeCSS(FacetTimelineLabelsStyle)}`
         ];
     }
 
@@ -186,4 +185,9 @@ export class FacetTimelineLabels extends FacetPlugin {
         this.labelContext.font = '10px "IBM Plex Sans", sans-serif';
         return this.labelContext.measureText(label).width;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-timeline-labels')) {
+    customElements.define('facet-timeline-labels', FacetTimelineLabels);
 }

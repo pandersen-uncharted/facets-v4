@@ -25,7 +25,7 @@
 import {FacetPlugin} from '../../FacetPlugin';
 import {FacetBarsValueData} from '../../../facet-bars-value/FacetBarsValue';
 import {FacetBarsBase} from '../../../facet-bars-base/FacetBarsBase';
-import {css, CSSResult, customElement, html, TemplateResult, unsafeCSS} from 'lit-element';
+import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
 
 // @ts-ignore
 import FacetBarsLabelsStyle from './FacetBarsLabels.css';
@@ -48,18 +48,17 @@ const kBooleanConverter = {
     fromAttribute: (value: string): boolean => {
         try {
             return JSON.parse(value);
-        } catch (e) {
+        } catch (_error) {
             return Boolean(value);
         }
     },
-    toAttribute: (value: boolean): string => JSON.stringify(Boolean(value)),
+    toAttribute: (value: boolean): string => JSON.stringify(Boolean(value))
 };
 
-@customElement('facet-bars-labels')
 export class FacetBarsLabels extends FacetPlugin {
     public static get styles(): CSSResult[] {
         return [
-            css`${unsafeCSS(FacetBarsLabelsStyle)}`,
+            css`${unsafeCSS(FacetBarsLabelsStyle)}`
         ];
     }
 
@@ -68,13 +67,13 @@ export class FacetBarsLabels extends FacetPlugin {
             automaticLabels: {
                 type: Boolean,
                 attribute: 'automatic-labels',
-                converter: kBooleanConverter,
+                converter: kBooleanConverter
             },
             drawDelimiters: {
                 type: Boolean,
                 attribute: 'draw-delimiters',
-                converter: kBooleanConverter,
-            },
+                converter: kBooleanConverter
+            }
         };
     }
 
@@ -121,7 +120,10 @@ export class FacetBarsLabels extends FacetPlugin {
                     this._processRow(rows[i], width, barStep, barStepPercentage);
                 }
             } else {
-                requestAnimationFrame((): Promise<unknown> => facet.requestUpdate());
+                requestAnimationFrame(() => {
+                    facet.requestUpdate();
+                    return Promise.resolve();
+                });
             }
 
             const result: TemplateResult[] = [];
@@ -152,7 +154,7 @@ export class FacetBarsLabels extends FacetPlugin {
                         ticks: [],
                         labels: [],
                         sections: [],
-                        section: null,
+                        section: null
                     });
                 }
 
@@ -167,7 +169,7 @@ export class FacetBarsLabels extends FacetPlugin {
                     row.section = {
                         label,
                         min: barIndex,
-                        max: barIndex + 1,
+                        max: barIndex + 1
                     };
                     row.sections.push(row.section);
                     if (label && this.drawDelimiters && barIndex >= 0) {
@@ -272,4 +274,9 @@ export class FacetBarsLabels extends FacetPlugin {
         ></div>
         `);
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-bars-labels')) {
+    customElements.define('facet-bars-labels', FacetBarsLabels);
 }

@@ -25,8 +25,8 @@
 import { FacetContainer } from '../facet-container/FacetContainer';
 import { FacetTemplate } from '../facet-template/FacetTemplate';
 import { FacetTermsValueData } from '../facet-terms-value/FacetTermsValue';
-import { css, CSSResult, customElement, html, TemplateResult, unsafeCSS } from 'lit-element';
-import { repeat } from 'lit-html/directives/repeat';
+import { css, CSSResult, html, TemplateResult, unsafeCSS } from 'lit';
+import { repeat } from 'lit/directives/repeat.js';
 import { preHTML } from '../tools/preHTML';
 import { polyMatches } from '../tools/PolyMatches';
 
@@ -53,7 +53,6 @@ export interface FacetTermsData {
 
 const kDefaultData = { values: [] };
 
-@customElement('facet-terms')
 export class FacetTerms extends FacetContainer {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -70,7 +69,7 @@ export class FacetTerms extends FacetContainer {
             subselection: { type: Object },
             multiselect: { type: Object },
             actionButtons: { type: Number, attribute: 'action-buttons' },
-            disabled: { type: Boolean },
+            disabled: { type: Boolean }
         };
     }
 
@@ -148,17 +147,17 @@ export class FacetTerms extends FacetContainer {
             if (value) {
                 const type = value.type || 'facet-terms-value';
                 const state = this.selection ? this.selection[key] && 'selected' || 'muted' : 'normal';
-                const subselection = this.subselection && this.subselection.hasOwnProperty(key) ? this.subselection[key] : null;
+                const subselection = this.subselection && Object.prototype.hasOwnProperty.call(this.subselection, key) ? this.subselection[key] : null;
                 const values = this.computeValuesArray(value, subselection);
                 const template = this.templates.get(type);
                 if (template) {
-                    return template.getHTML(value, {
+                    return template.generateTemplate(value, {
                         'id': key,
                         'action-buttons': this.actionButtons,
                         'state': state,
                         'contrast': contrast,
                         '.values': values,
-                        '@click': this.handleMouseClickEvent,
+                        '@click': this.handleMouseClickEvent
                     });
                 } else if (type === 'facet-terms-value') {
                     return html`
@@ -232,4 +231,9 @@ export class FacetTerms extends FacetContainer {
             }
         }
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-terms')) {
+    customElements.define('facet-terms', FacetTerms);
 }

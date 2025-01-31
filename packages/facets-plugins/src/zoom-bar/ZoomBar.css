@@ -34,7 +34,7 @@
     flex-grow: 1;
     margin: 0 14px;
     padding: 0 10px;
-    background-color: #EAEBEC;
+    background-color: var(--facets-plugins-zoom-bar-background, #EAEBEC);
     border-radius: 5px;
     overflow: hidden;
     display: flex;
@@ -50,14 +50,14 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    background-color: #A4C2FC;
+    background-color: var(--facets-plugins-zoom-bar-selection-background, #A4C2FC);
 }
 
 .zoom-bar-thumb {
     position: absolute;
     top: 0;
     bottom: 0;
-    background-color: #C2C3C4;
+    background-color: var(--facets-plugins-zoom-bar-thumb-background, #C2C3C4);
     cursor: pointer;
 }
 
@@ -84,12 +84,12 @@
     left: -10px;
     right: 100%;
     border-radius: 5px 0 0 5px;
-    border-right: 1px solid white;
+    border-right: 1px solid var(--facets-plugins-zoom-bar-handle-border, white);
 }
 
 .zoom-bar-handle-right {
     left: 100%;
     right: -10px;
     border-radius: 0 5px 5px 0;
-    border-left: 1px solid white;
+    border-left: 1px solid var(--facets-plugins-zoom-bar-handle-border, white);
 }

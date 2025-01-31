@@ -1,203 +1,183 @@
-/*
- *  Copyright (c) 2020 Uncharted Software Inc.
- *  http://www.uncharted.software/
- *
- *   Permission is hereby granted, free of charge, to any person obtaining a copy of
- *  this software and associated documentation files (the "Software"), to deal in
- *  the Software without restriction, including without limitation the rights to
- *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- *  of the Software, and to permit persons to whom the Software is furnished to do
- *  so, subject to the following conditions:
- *
- *  The above copyright notice and this permission notice shall be included in all
- *  copies or substantial portions of the Software.
- *
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND EXPRESS OR
- *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- *  SOFTWARE.
- *
- */
+import { css, unsafeCSS, html, LitElement, TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
+import { basicSetup, EditorView } from 'codemirror';
+import { html as langHtml } from '@codemirror/lang-html';
+import { css as langCss } from '@codemirror/lang-css';
+import { javascript as langJavascript } from '@codemirror/lang-javascript';
 
-// @ts-ignore
-import CodeMirror from 'codemirror';
-// @ts-ignore
-import codeMirrorStyle from 'codemirror/lib/codemirror.css';
-// @ts-ignore
-import darculaStyle from 'codemirror/theme/darcula.css';
-// @ts-ignore
-import examplesStyle from './FacetExample.css';
 
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/mode/htmlmixed/htmlmixed';
-import 'codemirror/mode/css/css';
-
-import {customElement, LitElement, property, TemplateResult, html, CSSResult, css, unsafeCSS} from 'lit-element';
-import {examples} from '../examples';
-
+import { examples } from '../examples';
 // @ts-ignore
-@customElement('facet-example')
+import examplesStyle from './style.css?inline';
+
 export class FacetExample extends LitElement {
-    @property({ type: Object })
-    public example: string = '';
+    // @ts-ignore
+    @property()
+    example: string = '';
 
-    private editorHTML: CodeMirror | null = null;
-    private editorCSS: CodeMirror | null = null;
-    private editorJS: CodeMirror | null = null;
+    private editorHTML: EditorView | null = null;
+    private editorCSS: EditorView | null = null;
+    private editorJS: EditorView | null = null;
     private preview: HTMLIFrameElement | null = null;
-    private iframeInitialized: boolean = false;
 
-    public static get styles(): CSSResult {
-        return css`
-        ${unsafeCSS(codeMirrorStyle)}
-        ${unsafeCSS(darculaStyle)}
+    static styles = css`
         ${unsafeCSS(examplesStyle)}
-        `;
-    }
+    `;
 
-    public constructor(example: string) {
+    constructor(exampleId: string) {
         super();
-        this.example = example;
+        this.example = exampleId;
     }
 
-    protected render(): TemplateResult | void {
+    render(): TemplateResult {
         return html`
-        <div class="facet-example-container">
-            <div class="facet-example-editor-container">
-                <div class="facet-example-editor-header">
-                    <div id="buttonHTML" class="facet-example-editor-button facet-example-editor-button-selected" @click="${this._handleEditorButton.bind(this, 'HTML')}">HTML</div>
-                    <div id="buttonCSS" class="facet-example-editor-button" @click="${this._handleEditorButton.bind(this, 'CSS')}">CSS</div>
-                    <div id="buttonJS" class="facet-example-editor-button" @click="${this._handleEditorButton.bind(this, 'JS')}">JS</div>
-                    <div class="facet-example-editor-button-run" @click="${this._renderHTML}">RUN</div>
+            <div class="facet-example-container">
+                <div class="facet-example-editor-container">
+                    <div class="facet-example-editor-header">
+                        <div
+                            id="buttonHTML"
+                            class="facet-example-editor-button facet-example-editor-button-selected"
+                            @click=${(): void => this._handleEditorButton('HTML')}
+                        >
+                            HTML
+                        </div>
+                        <div
+                            id="buttonCSS"
+                            class="facet-example-editor-button"
+                            @click=${(): void => this._handleEditorButton('CSS')}
+                        >
+                            CSS
+                        </div>
+                        <div
+                            id="buttonJS"
+                            class="facet-example-editor-button"
+                            @click=${(): void => this._handleEditorButton('JS')}
+                        >
+                            JS
+                        </div>
+                        <div
+                            class="facet-example-editor-button-run"
+                            @click=${this._renderHTML}>
+                            RUN
+                        </div>
+                    </div>
+                    <div class="facet-example-editor-body">
+                        <div id="editorHTML" class="facet-example-editor" style="visibility:visible"></div>
+                        <div id="editorCSS" class="facet-example-editor" style="visibility:hidden"></div>
+                        <div id="editorJS" class="facet-example-editor" style="visibility:hidden"></div>
+                    </div>
                 </div>
-                <div class="facet-example-editor-body">
-                    <div id="editorHTML" class="facet-example-editor" style="visibility:visible"></div>
-                    <div id="editorCSS" class="facet-example-editor" style="visibility:hidden"></div>
-                    <div id="editorJS" class="facet-example-editor" style="visibility:hidden"></div>
+                <div id="preview" class="facet-example-preview">
+                    <div class="facet-example-preview-header">
+                        <select id="facet-example-select" class="facet-example-select" @change=${this._handleSelectChange}>
+                            <option disabled value> -- example -- </option>
+                            ${Object.keys(examples).map(example => html`<option>${example}</option>`)}
+                            <option>empty</option>
+                        </select>
+                    </div>
+                    <iframe id="preview-iframe" class="facet-example-preview-iframe"></iframe>
                 </div>
             </div>
-            <div id="preview" class="facet-example-preview">
-                <div class="facet-example-preview-header">
-                    <select id="facet-example-select" class="facet-example-select" @change="${this._handleSelectChange}">
-                        <option disabled value> -- example -- </option>
-                        ${Object.keys(examples).map((example: string): TemplateResult => html`<option>${example}</option>`)}
-                        <option>empty</option>
-                    </select>
-                </div>
-                <iframe id="preview-iframe" class="facet-example-preview-iframe"></iframe>
-            </div>
-        </div>
         `;
     }
 
-    protected firstUpdated(_changedProperties: Map<PropertyKey, unknown>): void {
-        super.firstUpdated(_changedProperties);
-        window.addEventListener('keydown', (event): void => {
-            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
-                event.preventDefault();
-                this._renderHTML();
-            }
-        });
+    connectedCallback(): void {
+        super.connectedCallback();
+        window.addEventListener('keydown', this._handleKeyDown);
     }
 
-    protected updated(_changedProperties: Map<PropertyKey, unknown>): void {
-        super.update(_changedProperties);
-        const example = (examples as any)[this.example];
-        if (!this.editorHTML) {
-            const editorElement = this.renderRoot.querySelector('#editorHTML');
-            this.editorHTML = new CodeMirror(editorElement, {
-                mode: 'htmlmixed',
-                theme: 'darcula',
-                value: example ? example.html : '',
-                lineNumbers: true,
-            });
-            this.editorHTML.setSize('100%', '100%');
-        }
+    disconnectedCallback(): void {
+        super.disconnectedCallback();
+        window.removeEventListener('keydown', this._handleKeyDown);
+    }
 
-        if (!this.editorCSS) {
-            const editorElement = this.renderRoot.querySelector('#editorCSS');
-            this.editorCSS = new CodeMirror(editorElement, {
-                mode: 'css',
-                theme: 'darcula',
-                value: example ? example.css : '',
-                lineNumbers: true,
-            });
-            this.editorCSS.setSize('100%', '100%');
+    private _handleKeyDown = (event: KeyboardEvent): void => {
+        if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+            event.preventDefault();
+            this._renderHTML();
         }
+    };
 
-        if (!this.editorJS) {
-            const editorElement = this.renderRoot.querySelector('#editorJS');
-            this.editorJS = new CodeMirror(editorElement, {
-                mode: 'javascript',
-                theme: 'darcula',
-                value: example ? example.js : '',
-                lineNumbers: true,
-            });
-            this.editorJS.setSize('100%', '100%');
-        }
-
-        if (!this.preview) {
-            this.preview = this.renderRoot.querySelector('#preview-iframe');
-        }
-
-        const select = this.renderRoot.querySelector('#facet-example-select') as HTMLSelectElement;
-        if (select) {
-            const selectedExample = examples.hasOwnProperty(this.example) ? this.example : null;
-            const exampleNames = Object.keys(examples);
-            const selectedIndex = selectedExample ? exampleNames.indexOf(selectedExample) + 1 : 0;
-            select.selectedIndex = selectedIndex;
-        }
-
+    firstUpdated(): void {
+        this._initializeEditors();
+        this._updateSelect();
         this._renderHTML();
     }
 
+    private _initializeEditors(): void {
+        const example = examples[this.example] || { html: '', css: '', js: '' };
+
+        const initEditor = (selector: string, lang: any, content: string): EditorView | null => {
+            const container = this.renderRoot.querySelector(selector);
+            if (!container) return null;
+
+            return new EditorView({
+                doc: content,
+                extensions: [
+                    basicSetup,
+                    lang()
+                ],
+                parent: container
+            });
+        };
+
+        this.editorHTML = initEditor('#editorHTML', langHtml, example.html);
+        this.editorCSS = initEditor('#editorCSS', langCss, example.css);
+        this.editorJS = initEditor('#editorJS', langJavascript, example.js);
+        this.preview = this.renderRoot.querySelector('#preview-iframe');
+    }
+
+    private _updateSelect(): void {
+        const select = this.renderRoot.querySelector('#facet-example-select') as HTMLSelectElement;
+        if (select) {
+            const selectedExample = Object.prototype.hasOwnProperty.call(examples, this.example) ? this.example : null;
+            const exampleNames = Object.keys(examples);
+            select.selectedIndex = selectedExample ? exampleNames.indexOf(selectedExample) + 1 : 0;
+        }
+    }
+
     private _getTemplateResult(): string {
-        const template = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<base target="_parent" />
-<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
-<style>
-${this.editorCSS.getValue()}
-</style>
-</head>
-<body>
-<script>
-if (!window.facetsdocs) {
-    const script = document.createElement('script');
-    script.setAttribute('type', 'text/javascript');
-    script.setAttribute('src', 'dist/iife/index.js');
+        return `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <base target="_parent" />
+                <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+                <style>
+                    ${this.editorCSS?.state.doc.toString()}
+                </style>
+            </head>
+            <body>
 
-    document.body.style.visibility = 'hidden';
-    script.addEventListener('load', function() {
-        setTimeout(function() {
-            document.body.style.visibility = 'visible';
-        }, 50);
-    });
+                <script>
+                    // Call the parent window's setup function
+                    if (!window.facetsdocs) {
+                        const script = document.createElement('script');
+                        script.setAttribute('type', 'text/javascript');
+                        script.setAttribute('src', 'dist/iife/index.js');
 
-    document.head.appendChild(script);
-}
-</script>
-${this.editorHTML.getValue()}
-<script>
-(function() {
-    ${this.editorJS.getValue()}
-})();
-</script>
-</body>
-</html>
+                        document.body.style.visibility = 'hidden';
+                        script.addEventListener('load', function() {
+                            setTimeout(function() {
+                                document.body.style.visibility = 'visible';
+                            }, 50);
+                        });
+
+                        document.head.appendChild(script);
+                    }
+                    (function() {
+                        ${this.editorJS?.state.doc.toString()}
+                    })();
+                </script>
+                ${this.editorHTML?.state.doc.toString()}
+            </body>
+            </html>
         `;
-        this.iframeInitialized = true;
-        return template;
     }
 
     private _renderHTML(): void {
-        if (this.preview && this.preview.contentDocument) {
+        if (this.preview?.contentDocument) {
             const templateResult = this._getTemplateResult();
             this.preview.contentDocument.open();
             this.preview.contentDocument.write(templateResult);
@@ -206,28 +186,24 @@ ${this.editorHTML.getValue()}
     }
 
     private _handleEditorButton(target: string): void {
-        const options = [
-            'HTML',
-            'CSS',
-            'JS',
-        ];
+        const options = ['HTML', 'CSS', 'JS'];
+        options.forEach(option => {
+            const button = this.renderRoot.querySelector(`#button${option}`) as Element;
+            const editor = this.renderRoot.querySelector(`#editor${option}`) as HTMLElement;
 
-        for (let i = 0, n = options.length; i < n; ++i) {
-            const button = this.renderRoot.querySelector(`#button${options[i]}`) as Element;
-            const editor = this.renderRoot.querySelector(`#editor${options[i]}`) as Element;
-
-            if (options[i] === target) {
-                button.setAttribute('class', 'facet-example-editor-button facet-example-editor-button-selected');
-                editor.setAttribute('style', 'visibility:visible');
-            } else {
-                button.setAttribute('class', 'facet-example-editor-button');
-                editor.setAttribute('style', 'visibility:hidden');
-            }
-        }
+            const isTarget = option === target;
+            button.classList.toggle('facet-example-editor-button-selected', isTarget);
+            editor.style.visibility = isTarget ? 'visible' : 'hidden';
+        });
     }
 
     private _handleSelectChange(e: Event): void {
         const select = e.target as HTMLSelectElement;
         window.location.href = `${window.location.pathname}?ex=${select.options[select.selectedIndex].value}`;
     }
+}
+
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-example')) {
+    customElements.define('facet-example', FacetExample);
 }

@@ -22,7 +22,7 @@
  *
  */
 
-import {html, TemplateResult} from 'lit-element';
+import {html, TemplateResult} from 'lit';
 
 interface CachedNeedlessValue {
     value: any;
@@ -70,7 +70,7 @@ export function preHTML(strings: TemplateStringsArray, ...values: any[]): Templa
             if (isSame) {
                 return html(
                     cachedStrings[i].strings as any,
-                    ...dropIndices(values, needlessValues),
+                    ...dropIndices(values, needlessValues)
                 );
             }
         }
@@ -89,7 +89,7 @@ export function preHTML(strings: TemplateStringsArray, ...values: any[]): Templa
         ) {
             needlessValues.push({
                 value: values[i],
-                index: i,
+                index: i
             });
             str += values[i] + strings[++i];
         }
@@ -104,7 +104,7 @@ export function preHTML(strings: TemplateStringsArray, ...values: any[]): Templa
 
     cachedStrings.push({
         strings: newStrings,
-        needlessValues,
+        needlessValues
     });
 
     return html(newStrings as any, ...dropIndices(values, needlessValues));

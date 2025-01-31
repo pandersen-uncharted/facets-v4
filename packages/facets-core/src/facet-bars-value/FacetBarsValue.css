@@ -94,15 +94,15 @@
 
 @keyframes facet-bars-value-loading-background {
     0% {
-        background-color: #F7F7F7;
+        background-color: var(--facet-bars-value-loading-background-stop-1, #F7F7F7);
     }
 
     50% {
-        background-color: #F3F3F3;
+        background-color: var(--facet-bars-value-loading-background-stop-2, #F3F3F3);
     }
 
     100% {
-        background-color: #F7F7F7;
+        background-color: var(--facet-bars-value-loading-background-stop-3, #F7F7F7);
     }
 }
 

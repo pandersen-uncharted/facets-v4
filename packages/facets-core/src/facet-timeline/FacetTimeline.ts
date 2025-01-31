@@ -22,11 +22,11 @@
  *
  */
 
-import { customElement, TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit-element';
+import { TemplateResult, html, CSSResult, css, unsafeCSS } from 'lit';
 import {
     FacetBarsBase,
     FacetBarsValueDataTyped,
-    kFacetBarsBaseDefaultValues,
+    kFacetBarsBaseDefaultValues
 } from '../facet-bars-base/FacetBarsBase';
 
 // @ts-ignore
@@ -39,7 +39,6 @@ export interface FacetTimelineValue extends FacetBarsValueDataTyped {
 
 export interface FacetTimelineData { [key: number]: FacetTimelineValue | null }
 
-@customElement('facet-timeline')
 export class FacetTimeline extends FacetBarsBase {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -52,7 +51,7 @@ export class FacetTimeline extends FacetBarsBase {
     public static get properties(): any {
         return {
             data: { type: Object },
-            disabled: { type: Boolean },
+            disabled: { type: Boolean }
         };
     }
 
@@ -112,3 +111,7 @@ export class FacetTimeline extends FacetBarsBase {
     }
 }
 
+// Register the custom element if it hasn't been registered yet
+if (!customElements.get('facet-timeline')) {
+    customElements.define('facet-timeline', FacetTimeline);
+}

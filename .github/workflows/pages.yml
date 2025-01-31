@@ -10,7 +10,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [14.x]
+                node-version: [18.20.2]
 
         steps:
             - name: checkout
@@ -20,19 +20,17 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: ${{ matrix.node-version }}
-            - run: npm install -g yarn
+            - run: corepack enable
+            - run: corepack install
 
             - name: install
-              run: yarn
-
-            - name: clean
-              run: yarn lerna run clean
+              run: yarn install
 
             - name: lint
-              run: yarn lerna run lint
+              run: yarn lint
 
             - name: build
-              run: yarn lerna run build
+              run: yarn build
 
             - name: pages
               working-directory: ./packages/facets-docs

@@ -22,9 +22,8 @@
  *
  */
 
-import {css, CSSResult, customElement, html, TemplateResult, unsafeCSS} from 'lit-element';
-import {repeat} from 'lit-html/directives/repeat';
-import {DirectiveFn} from 'lit-html/lib/directive';
+import {css, CSSResult, html, TemplateResult, unsafeCSS} from 'lit';
+import {repeat} from 'lit/directives/repeat.js';
 import {FacetContainer} from '../facet-container/FacetContainer';
 import {FacetBarsValueData, kFacetVarsValueNullData} from '../facet-bars-value/FacetBarsValue';
 
@@ -76,8 +75,7 @@ const kFilterValueHasChanged = (newVal: [FacetBarsFilterEdge, FacetBarsFilterEdg
     }
     return false;
 };
-
-@customElement('facet-bars-base') /* should not be instantiated as a custom element */
+/* should not be instantiated as a custom element */
 export class FacetBarsBase extends FacetContainer {
     public static get styles(): CSSResult[] {
         const styles = this.getSuperStyles();
@@ -95,7 +93,7 @@ export class FacetBarsBase extends FacetContainer {
             filter: { type: Array, hasChanged: kFilterValueHasChanged },
             selection: { type: Array, hasChanged: kRangeValueHasChanged },
             subselection: { type: Array },
-            actionButtons: { type: Number, attribute: 'action-buttons' },
+            actionButtons: { type: Number, attribute: 'action-buttons' }
         };
     }
 
@@ -268,10 +266,10 @@ export class FacetBarsBase extends FacetContainer {
         const actionButtons = this.actionButtons.toString();
         const view: [number, number] = this.view;
         const values = this._values;
-        const htmlTemplate: DirectiveFn = this.getValuesHTML(
+        const htmlTemplate = this.getValuesHTML(
             this._getViewValues(values, view),
             actionButtons,
-            view[0],
+            view[0]
         );
 
         this._activeView = view;
@@ -283,8 +281,8 @@ export class FacetBarsBase extends FacetContainer {
     protected getValuesHTML(
         values: (FacetBarsValueData|null)[],
         actionButtons: string,
-        offset: number,
-    ): DirectiveFn {
+        offset: number
+    ): ReturnType<typeof repeat> {
         const theme = this.barValueTheme;
         const contrast = this.hover;
         let id = 0;
@@ -301,7 +299,7 @@ export class FacetBarsBase extends FacetContainer {
             const clipRight = i + 1 > domain[1] ? (i + 1) - domain[1] : 0;
 
             if (template) {
-                return template.getHTML(value || kFacetVarsValueNullData, {
+                return template.generateTemplate(value || kFacetVarsValueNullData, {
                     'id': i + offset,
                     'theme': theme,
                     'facet-value-state': overrideState !== null ? overrideState : computedState,
@@ -309,7 +307,7 @@ export class FacetBarsBase extends FacetContainer {
                     'contrast': contrast,
                     '.values': valuesArray,
                     '.clipLeft': clipLeft,
-                    '.clipRight': clipRight,
+                    '.clipRight': clipRight
                 });
             } else if (type === 'facet-bars-value') {
                 return html`
