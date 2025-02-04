@@ -29,7 +29,7 @@
     "dependencies": {
         "@fortawesome/free-regular-svg-icons": "5.15.4",
         "@fortawesome/free-solid-svg-icons": "5.15.4",
-        "@uncharted.software/facets-core": "workspace:^4.0.0",
+        "@uncharted.software/facets-core": "workspace:^4.0.4",
         "lit": "3.2.1"
     },
     "devDependencies": {
