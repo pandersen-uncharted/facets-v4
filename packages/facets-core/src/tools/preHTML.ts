@@ -23,7 +23,7 @@
  */
 
 import {TemplateResult} from 'lit';
-import { html, literal, unsafeStatic } from 'lit/static-html.js';
+import { html } from 'lit';
 
 interface CachedNeedlessValue {
     value: any;
