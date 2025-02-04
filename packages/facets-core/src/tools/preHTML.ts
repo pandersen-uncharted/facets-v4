@@ -22,8 +22,7 @@
  *
  */
 
-import {TemplateResult} from 'lit';
-import { html } from 'lit';
+import {html, TemplateResult} from 'lit';
 
 interface CachedNeedlessValue {
     value: any;
