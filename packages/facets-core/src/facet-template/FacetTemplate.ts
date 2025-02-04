@@ -132,8 +132,10 @@ export class FacetTemplate extends LitElement {
         }
     }
 
-    public connectedCallback(): void {
+    public async connectedCallback(): Promise<void> {
         super.connectedCallback();
+
+        await new Promise(requestAnimationFrame);
 
         this._initializeTemplateTag();
 
@@ -187,7 +189,7 @@ export class FacetTemplate extends LitElement {
             }
         }
 
-        const type = this.target.split('#')[0];
+        const type = this.target.split(':')[0];
         const tagHTML = `<${type}${this.templateAttributes.size ? ` ${((): string => {
             const result: string[] = [];
             this.templateAttributes.forEach(
@@ -294,6 +296,10 @@ export class FacetTemplate extends LitElement {
     }
 
     private _getHTML(data: any, components: TemplateComponents, customAttributes: {[key: string]: any}): TemplateResult {
+        const createTemplateStringsArray = (strings: string[]): TemplateStringsArray => {
+            return Object.freeze(Object.assign([...strings], { raw: Object.freeze([...strings]) })) as TemplateStringsArray;
+        }
+
         const values: any[] = [];
         for (let i = 0, n = components.values.length; i < n; ++i) {
             if (typeof components.values[i] === 'symbol') {
@@ -316,7 +322,7 @@ export class FacetTemplate extends LitElement {
                 values.push(this._getEscapedValue(data, components.values[i]));
             }
         }
-        return html(components.strings as any, ...values);
+        return html(createTemplateStringsArray(components.strings), ...values);
     }
 
     private _getSlotsHTML(data: any): TemplateResult[] {

@@ -22,7 +22,8 @@
  *
  */
 
-import {html, TemplateResult} from 'lit';
+import {TemplateResult} from 'lit';
+import { html, literal, unsafeStatic } from 'lit/static-html.js';
 
 interface CachedNeedlessValue {
     value: any;
@@ -54,6 +55,10 @@ const templateStringsCache = new WeakMap<TemplateStringsArray, CachedTemplateStr
 // Convert dynamic tags to template strings
 // example: <${'div'}>${'this is example'}</${'div'}> => <div>${'this is example'}</div>
 export function preHTML(strings: TemplateStringsArray, ...values: any[]): TemplateResult {
+    const createTemplateStringsArray = (strings: string[]): TemplateStringsArray => {
+        return Object.freeze(Object.assign([...strings], { raw: Object.freeze([...strings]) })) as TemplateStringsArray;
+    }
+
     // check cache !important return equal link at first argument
     let cachedStrings = templateStringsCache.get(strings) as CachedTemplateStrings[];
     if (cachedStrings) {
@@ -69,7 +74,7 @@ export function preHTML(strings: TemplateStringsArray, ...values: any[]): Templa
 
             if (isSame) {
                 return html(
-                    cachedStrings[i].strings as any,
+                    createTemplateStringsArray(cachedStrings[i].strings),
                     ...dropIndices(values, needlessValues)
                 );
             }
@@ -107,5 +112,5 @@ export function preHTML(strings: TemplateStringsArray, ...values: any[]): Templa
         needlessValues
     });
 
-    return html(newStrings as any, ...dropIndices(values, needlessValues));
+    return html(createTemplateStringsArray(newStrings), ...dropIndices(values, needlessValues));
 }
