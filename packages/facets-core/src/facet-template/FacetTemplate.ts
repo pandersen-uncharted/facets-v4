@@ -189,7 +189,7 @@ export class FacetTemplate extends LitElement {
             }
         }
 
-        const type = this.target.split(':')[0];
+        const type = this.target.split('#')[0];
         const tagHTML = `<${type}${this.templateAttributes.size ? ` ${((): string => {
             const result: string[] = [];
             this.templateAttributes.forEach(
