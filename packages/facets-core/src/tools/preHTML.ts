@@ -23,7 +23,7 @@
  */
 
 import {html, TemplateResult} from 'lit';
-import { createTemplateStringsArray } from './utiities';
+import { createTemplateStringsArray } from './utilities';
 
 interface CachedNeedlessValue {
     value: any;

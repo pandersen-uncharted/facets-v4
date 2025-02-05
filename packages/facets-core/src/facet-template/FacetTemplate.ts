@@ -25,7 +25,7 @@
 import {LitElement, TemplateResult, html} from 'lit';
 import {directive, Directive} from 'lit/directive.js';
 import {MutationWrapper} from '../tools/MutationWrapper';
-import { createTemplateStringsArray } from '../tools/utiities';
+import { createTemplateStringsArray } from '../tools/utilities';
 
 declare global {
     interface HTMLElementTagNameMap {
