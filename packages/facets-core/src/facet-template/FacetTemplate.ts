@@ -25,6 +25,7 @@
 import {LitElement, TemplateResult, html} from 'lit';
 import {directive, Directive} from 'lit/directive.js';
 import {MutationWrapper} from '../tools/MutationWrapper';
+import { createTemplateStringsArray } from '../tools/utiities';
 
 declare global {
     interface HTMLElementTagNameMap {
@@ -296,10 +297,6 @@ export class FacetTemplate extends LitElement {
     }
 
     private _getHTML(data: any, components: TemplateComponents, customAttributes: {[key: string]: any}): TemplateResult {
-        const createTemplateStringsArray = (strings: string[]): TemplateStringsArray => {
-            return Object.freeze(Object.assign([...strings], { raw: Object.freeze([...strings]) })) as TemplateStringsArray;
-        }
-
         const values: any[] = [];
         for (let i = 0, n = components.values.length; i < n; ++i) {
             if (typeof components.values[i] === 'symbol') {
